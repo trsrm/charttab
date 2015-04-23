@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "charttab",
+    "description": "The name of the application"
+  },
+  "appDescription": {
+    "message": "Motivation charts on Chrome's new tab page.",
+    "description": "The description of the application"
+  }
+}
