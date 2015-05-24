@@ -42,8 +42,6 @@ var getAllCallback = function (list) {
     }
 };
 
-
-
 document.addEventListener('DOMContentLoaded', function () {
     if (!chrome.management) return;
     chrome.management.getAll(getAllCallback);

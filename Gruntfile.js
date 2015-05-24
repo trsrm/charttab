@@ -20,49 +20,36 @@ module.exports = function (grunt) {
         watch: {
             bower: {
                 files: ['bower.json'],
-                tasks: ['bowerInstall']
-            },
-            js: {
-                files: ['app/scripts/{,*/}*.js'],
-                tasks: ['jshint'],
-                options: {
-                    livereload: '<%= connect.options.livereload %>'
-                }
+                tasks: ['wiredep']
             },
             gruntfile: {
                 files: ['Gruntfile.js']
             },
-            styles: {
-                files: ['app/styles/{,*/}*.css'],
-                tasks: [],
-                options: {
-                    livereload: '<%= connect.options.livereload %>'
-                }
-            },
             livereload: {
-                options: {
-                    livereload: '<%= connect.options.livereload %>'
-                },
                 files: [
                     'app/*.html',
+                    'app/scripts/{,*/}*.js',
+                    'app/styles/{,*/}*.css',
                     'app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
                     'app/manifest.json',
                     'app/_locales/{,*/}*.json'
-                ]
+                ],
+                options: {
+                    livereload: '<%= connect.options.livereload %>'
+                }
             }
         },
 
         // Grunt server and debug server setting
         connect: {
             options: {
-                port: 9000,
                 livereload: 35729,
-                // change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost'
+                hostname: 'localhost',
+                port: 9000
             },
-            chrome: {
+            debug: {
                 options: {
-                    open: false,
+                    open: true,
                     base: [
                         'app'
                     ]
@@ -81,11 +68,12 @@ module.exports = function (grunt) {
 
         // Empties folders to start fresh
         clean: {
-            chrome: {},
+            debug: '.tmp',
             dist: {
                 files: [{
                     dot: true,
                     src: [
+                        '.tmp',
                         'dist/*',
                         '!dist/.git*'
                     ]
@@ -102,26 +90,18 @@ module.exports = function (grunt) {
             all: [
                 'Gruntfile.js',
                 'app/scripts/{,*/}*.js',
-                '!app/scripts/vendor/*',
                 'test/spec/{,*/}*.js'
             ]
         },
 
-        // Jasmine tests:
-        jasmine: {
-            all: {
-                options: {
-                    specs: 'test/spec/{,*/}*.js'
-                }
-            }
-        },
-
-        // Automatically inject Bower components into the HTML file
-        bowerInstall: {
+        // Automatically inject Bower components into the app
+        wiredep: {
             app: {
                 src: [
-                    'app/*.html'
-                ]
+                    'app/newtab.html',
+                    'app/options.html'
+                ],
+                ignorePath: /\.\.\//
             }
         },
 
@@ -171,22 +151,29 @@ module.exports = function (grunt) {
         },
 
         htmlmin: {
+            options: {
+                removeComments: true,
+                collapseWhitespace: true
+            },
             dist: {
-                options: {
-                    // removeCommentsFromCDATA: true,
-                    // collapseWhitespace: true,
-                    // collapseBooleanAttributes: true,
-                    // removeAttributeQuotes: true,
-                    // removeRedundantAttributes: true,
-                    // useShortDoctype: true,
-                    // removeEmptyAttributes: true,
-                    // removeOptionalTags: true
-                },
                 files: [{
                     expand: true,
                     cwd: 'app',
                     src: '*.html',
                     dest: 'dist'
+                }]
+            }
+        },
+
+        // ng-annotate tries to make the code safe for minification automatically
+        // by using the Angular long form for dependency injection.
+        ngAnnotate: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '.tmp/concat/scripts',
+                    src: '*.js',
+                    dest: '.tmp/concat/scripts'
                 }]
             }
         },
@@ -213,7 +200,7 @@ module.exports = function (grunt) {
 
         // Run some tasks in parallel to speed up build process
         concurrent: {
-            chrome: [],
+            debug: [],
             dist: [
                 'imagemin',
                 'svgmin'
@@ -255,19 +242,32 @@ module.exports = function (grunt) {
                     dest: ''
                 }]
             }
+        },
+
+        // Jasmine tests:
+        jasmine: {
+            all: {
+                options: {
+                    specs: 'test/spec/{,*/}*.js'
+                }
+            }
         }
+
     });
 
     grunt.registerTask('debug', function () {
         grunt.task.run([
-            'jshint',
-            'concurrent:chrome',
-            'connect:chrome',
+            'clean:debug',
+            'wiredep',
+            'concurrent:debug',
+            'connect:debug',
             'watch'
         ]);
     });
 
     grunt.registerTask('test', [
+        'clean:debug',
+        'wiredep',
         'connect:test',
         'jasmine'
     ]);
@@ -275,13 +275,16 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'chromeManifest:dist',
+        'wiredep',
         'useminPrepare',
         'concurrent:dist',
-        'cssmin',
         'concat',
+        'ngAnnotate',
+        'cssmin',
         'uglify',
         'copy',
         'usemin',
+        'htmlmin',
         'compress'
     ]);
 
