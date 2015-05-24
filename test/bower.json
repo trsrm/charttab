@@ -2,8 +2,7 @@
   "name": "charttab",
   "private": true,
   "dependencies": {
-    "chai": "~1.8.0",
-    "mocha": "~1.14.0"
+    "jasmine": "2.2.x"
   },
   "devDependencies": {}
 }
