@@ -49,7 +49,7 @@ module.exports = function (grunt) {
             },
             debug: {
                 options: {
-                    open: true,
+                    open: false,
                     base: [
                         'app'
                     ]
@@ -101,7 +101,9 @@ module.exports = function (grunt) {
                     'app/newtab.html',
                     'app/options.html'
                 ],
-                ignorePath: /\.\.\//
+                exclude: [
+                    'livereload'
+                ]
             }
         },
 
@@ -214,10 +216,7 @@ module.exports = function (grunt) {
                     buildnumber: true,
                     indentSize: 2,
                     background: {
-                        target: 'scripts/background.js',
-                        exclude: [
-                            'scripts/livereload.js'
-                        ]
+                        target: 'scripts/background.js'
                     }
                 },
                 src: 'app',

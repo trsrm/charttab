@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_appName__",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "default_locale": "en",
   "description": "__MSG_appDescription__",
   "icons": {
@@ -11,19 +11,14 @@
   },
   "author": "Taras Romaniv",
   "permissions": [
-    "management"
+    "management",
+    "storage"
   ],
   "chrome_url_overrides": {
     "newtab": "newtab.html"
   },
   "homepage_url": "http://taras-romaniv.blogspot.com",
   "minimum_chrome_version": "40",
-  "background": {
-    "scripts": [
-      "scripts/livereload.js",
-      "scripts/background.js"
-    ]
-  },
   "options_ui": {
     "page": "options.html",
     "chrome_style": true
