@@ -20,7 +20,8 @@
     "jasmine": true,
     "loopfunc": true,
     "globals": {
-        "chrome": true,
-        "crypto": true
+        "chrome": false,
+        "crypto": false,
+        "angular": false
     }
 }

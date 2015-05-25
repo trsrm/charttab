@@ -1,5 +1,3 @@
-/* global describe, it */
-
 'use strict';
 
 describe('Give it some context', function () {

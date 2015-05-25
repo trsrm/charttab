@@ -1,3 +1,3 @@
 'use strict';
 
-console.log('Options script loaded.');
+angular.module('options', ['ngMaterial']);

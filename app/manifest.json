@@ -1,12 +1,13 @@
 {
   "manifest_version": 2,
   "name": "__MSG_appName__",
-  "version": "0.0.15",
+  "version": "0.0.32",
   "default_locale": "en",
   "description": "__MSG_appDescription__",
   "icons": {
-    "16": "images/icon-16.png",
-    "128": "images/icon-128.png"
+    "16": "images/logo-16.png",
+    "48": "images/logo-48.png",
+    "128": "images/logo-128.png"
   },
   "author": "Taras Romaniv",
   "permissions": [
@@ -19,7 +20,7 @@
   "minimum_chrome_version": "40",
   "background": {
     "scripts": [
-      "scripts/chromereload.js",
+      "scripts/livereload.js",
       "scripts/background.js"
     ]
   },

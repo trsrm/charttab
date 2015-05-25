@@ -121,7 +121,7 @@ module.exports = function (grunt) {
         // Performs rewrites based on rev and the useminPrepare configuration
         usemin: {
             options: {
-                assetsDirs: ['dist', 'dist/images']
+                assetsDirs: ['dist', 'dist/images', 'dist/styles']
             },
             html: ['dist/{,*/}*.html'],
             css: ['dist/styles/{,*/}*.css']
@@ -158,7 +158,7 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: 'app',
+                    cwd: 'dist',
                     src: '*.html',
                     dest: 'dist'
                 }]
@@ -190,7 +190,6 @@ module.exports = function (grunt) {
                         '*.{ico,png,txt}',
                         'images/{,*/}*.{webp,gif}',
                         '{,*/}*.html',
-                        'styles/{,*/}*.css',
                         'styles/fonts/{,*/}*.*',
                         '_locales/{,*/}*.json'
                     ]
@@ -217,7 +216,7 @@ module.exports = function (grunt) {
                     background: {
                         target: 'scripts/background.js',
                         exclude: [
-                            'scripts/chromereload.js'
+                            'scripts/livereload.js'
                         ]
                     }
                 },
