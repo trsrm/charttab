@@ -5,10 +5,21 @@ body {
     font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
+/* HELPERS */
+
+.input-description {
+    display: inline-block;
+    margin: 26px 0 0 10px;
+}
+
 /* FORMS */
 
-.add-kr-container {
+.add-key-result {
     width: 320px;
+}
+
+.update-value {
+    width: 300px;
 }
 
 /* CHARTS */
@@ -32,7 +43,7 @@ body {
     right: 0;
     height: 42px;
     transition: 0.2s;
-    transition-delay: 0.5s;
+    transition-delay: 0.3s;
 }
 
 .chart .actions {

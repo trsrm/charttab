@@ -1,0 +1,29 @@
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">Submit results</div>
+    </md-toolbar>
+    <form ng-submit="add()">
+        <md-dialog-content class="update-value" layout="row">
+            <md-input-container flex="25">
+                <label>Value</label>
+                <input type="number" ng-model="data.value" min="1" max="1000" autocomplete="off" required>
+            </md-input-container>
+            <span class="input-description" flex="35">{{units}}</span>
+            <md-input-container flex="40">
+                <label>Date</label>
+                <span class="md-placeholder">{{dateFormat}}</span>
+                <input type="text" autocomplete="off" maxlength="10" required
+                       pattern="20\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])"
+                       ng-model="data.date">
+            </md-input-container>
+        </md-dialog-content>
+        <div class="md-actions">
+            <md-button class="md-accent" type="button" ng-click="cancel()">
+                Cancel
+            </md-button>
+            <md-button class="md-primary" type="submit">
+                Submit
+            </md-button>
+        </div>
+    </form>
+</md-dialog>

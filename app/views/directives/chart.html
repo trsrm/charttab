@@ -2,12 +2,18 @@
     <md-card-content class="content">
         <div class="header">
             <div class="actions" layout="row" layout-align="center center">
-                <md-button>Results</md-button>
-                <md-button>Edit</md-button>
-                <md-button>Delete</md-button>
+                <md-button ng-click="updateValue($event, data.id)">
+                    Results
+                </md-button>
+                <md-button ng-disabled="true">
+                    Edit
+                </md-button>
+                <md-button ng-disabled="true">
+                    Delete
+                </md-button>
             </div>
             <div class="details">
-                <p class="result">{{data.result}} of {{data.goal}}</p>
+                <p class="result">{{data.result}} of {{data.goal}} {{data.units}}</p>
                 <h2 class="title">{{data.title}}</h2>
             </div>
         </div>
