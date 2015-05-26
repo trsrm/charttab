@@ -16,4 +16,11 @@ angular.module('charttab').controller('PageCtrl',
             $scope.charts = chartsData;
         });
 
+        chrome.storage.onChanged.addListener(function (changes) {
+            if (!changes.krs) return;
+            charts.getAll().then(function (chartsData) {
+                $scope.charts = chartsData;
+            });
+        });
+
     });
