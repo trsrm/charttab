@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "dependencies": {
     "angular-material": "0.9.x",
-    "livereload": "2.2.x"
+    "livereload": "2.2.x",
+    "angular-chart.js": "0.7.x",
+    "angular-moment": "0.10.x"
   },
   "devDependencies": {}
 }

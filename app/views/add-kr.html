@@ -1,0 +1,48 @@
+<md-dialog ng-controller="AddKrCtrl" xmlns="http://www.w3.org/1999/html">
+    <md-toolbar>
+        <div class="md-toolbar-tools">Add key result</div>
+    </md-toolbar>
+    <form name="krForm" ng-submit="add()">
+        <md-dialog-content class="add-kr-container">
+            <md-input-container>
+                <label>Title</label>
+                <input type="text" ng-model="kr.title" autocomplete="off" maxlength="32" required>
+            </md-input-container>
+            <div layout="row">
+                <md-input-container flex="50">
+                    <label>Goal</label>
+                    <input type="number" ng-model="kr.goal" min="1" max="1000" autocomplete="off" required>
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>Units</label>
+                    <span class="md-placeholder">%, times, points, etc.</span>
+                    <input type="text" ng-model="kr.units" autocomplete="off" maxlength="16" required>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container flex="50">
+                    <label>Start Date</label>
+                    <span class="md-placeholder">{{dateFormat}}</span>
+                    <input type="text" autocomplete="off" maxlength="10" required
+                           pattern="20\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])"
+                           ng-model="kr.start">
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>End Date</label>
+                    <span class="md-placeholder">{{dateFormat}}</span>
+                    <input type="text" autocomplete="off" maxlength="10" required
+                           pattern="20\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])"
+                           ng-model="kr.end">
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <div class="md-actions">
+            <md-button class="md-accent" type="button" ng-click="cancel()">
+                Cancel
+            </md-button>
+            <md-button class="md-primary" type="submit">
+                Add
+            </md-button>
+        </div>
+    </form>
+</md-dialog>

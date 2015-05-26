@@ -1,12 +1,13 @@
 'use strict';
 
-angular.module('newtab').controller('NewtabCtrl', function ($scope, $mdDialog) {
+angular.module('charttab').controller('NewtabCtrl', function ($scope, dialog, charts) {
 
-    $scope.openDialog = function(event) {
-        $mdDialog.show({
-            templateUrl: '/views/dialog.html',
-            targetEvent: event
-        });
+    $scope.addKr = function (event) {
+        dialog.show('/views/add-kr.html', event);
     };
+
+    charts.getAll().then(function (chartsData) {
+        $scope.charts = chartsData;
+    });
 
 });
