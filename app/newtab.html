@@ -16,15 +16,8 @@
 <body ng-app="charttab" ng-controller="NewtabCtrl">
 
     <div layout="row" layout-wrap>
-        <div class="chart" flex="25" flex-lg="33" flex-md="50" flex-sm="100" ng-repeat="chart in charts">
-            <md-card>
-                <md-card-content>
-                    <p class="result">{{chart.result}} of {{chart.goal}}</p>
-                    <h2 class="title">{{chart.title}}</h2>
-                    <canvas class="chart chart-line" data="chart.data" labels="chart.labels" options="chart.options">
-                    </canvas>
-                </md-card-content>
-            </md-card>
+        <div flex="25" flex-lg="33" flex-md="50" flex-sm="100" ng-repeat="chart in charts">
+            <chart data="chart"></chart>
         </div>
     </div>
 
@@ -50,6 +43,7 @@
     <script src="scripts/config.js"></script>
     <script src="scripts/controllers/newtab.js"></script>
     <script src="scripts/controllers/add-kr.js"></script>
+    <script src="scripts/directives/chart.js"></script>
     <script src="scripts/services/dialog.js"></script>
     <script src="scripts/services/krs.js"></script>
     <script src="scripts/services/charts.js"></script>

@@ -13,8 +13,46 @@ body {
 
 /* CHARTS */
 
-.chart .title {
+.chart .content {
+    padding-top: 0;
+}
+
+.chart .header {
+    height: 26px;
     border-bottom: 2px solid #97bbcd;
+    position: relative;
+    overflow: hidden;
+    padding-top: 16px;
+}
+
+.chart .actions,
+.chart .details {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 42px;
+    transition: 0.2s;
+    transition-delay: 0.5s;
+}
+
+.chart .actions {
+    top: -42px;
+}
+
+.chart:hover .actions {
+    top: 0;
+}
+
+.chart .details  {
+    padding-top: 16px;
+    top: 0;
+}
+
+.chart:hover .details  {
+    top: 42px;
+}
+
+.chart .title {
     font-weight: 400;
     margin: 0;
     line-height: 1em;

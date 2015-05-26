@@ -9,7 +9,8 @@ angular.module('charttab').service('charts', function ($q, moment, krs, config) 
         scaleStartValue: 0,
         showScale: false,
         pointDotRadius: 3,
-        pointHitDetectionRadius: 3
+        pointHitDetectionRadius: 3,
+        showTooltips: false
     };
 
     /**

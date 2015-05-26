@@ -1,0 +1,17 @@
+<md-card class="chart">
+    <md-card-content class="content">
+        <div class="header">
+            <div class="actions" layout="row" layout-align="center center">
+                <md-button>Results</md-button>
+                <md-button>Edit</md-button>
+                <md-button>Delete</md-button>
+            </div>
+            <div class="details">
+                <p class="result">{{data.result}} of {{data.goal}}</p>
+                <h2 class="title">{{data.title}}</h2>
+            </div>
+        </div>
+        <canvas class="chart chart-line" data="data.data" labels="data.labels" options="data.options">
+        </canvas>
+    </md-card-content>
+</md-card>
