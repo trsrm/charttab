@@ -1,0 +1,18 @@
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">Delete key result</div>
+    </md-toolbar>
+    <form ng-submit="add()">
+        <md-dialog-content class="delete-confirm" layout="row">
+            Do you really want to delete "{{title}}"?
+        </md-dialog-content>
+        <div class="md-actions">
+            <md-button class="md-accent" ng-click="cancel()">
+                No
+            </md-button>
+            <md-button class="md-primary" ng-click="remove()">
+                Yes
+            </md-button>
+        </div>
+    </form>
+</md-dialog>

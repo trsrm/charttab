@@ -2,13 +2,13 @@
     <md-card-content class="content">
         <div class="header">
             <div class="actions" layout="row" layout-align="center center">
-                <md-button ng-click="updateValue($event, data.id)">
+                <md-button ng-click="updateValue($event)">
                     Results
                 </md-button>
                 <md-button ng-disabled="true">
                     Edit
                 </md-button>
-                <md-button ng-disabled="true">
+                <md-button ng-click="delete($event)">
                     Delete
                 </md-button>
             </div>

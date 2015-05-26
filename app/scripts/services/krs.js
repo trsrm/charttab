@@ -75,4 +75,20 @@ angular.module('charttab').service('krs',
             return deferred.promise;
         };
 
+        /**
+         * Delete key result.
+         * @param {number} krIndex
+         */
+        this.remove = function(krIndex) {
+            var deferred = $q.defer();
+
+            this.getAll().then(function (krsData) {
+                krsData.splice(krIndex, 1);
+
+                chrome.storage.sync.set({krs: krsData}, deferred.resolve);
+            });
+
+            return deferred.promise;
+        };
+
     });

@@ -12,7 +12,7 @@ body {
     margin: 26px 0 0 10px;
 }
 
-/* FORMS */
+/* DIALOGS */
 
 .add-key-result {
     width: 320px;
@@ -20,6 +20,10 @@ body {
 
 .update-value {
     width: 300px;
+}
+
+.delete-confirm {
+    width: 260px;
 }
 
 /* CHARTS */
