@@ -13,7 +13,24 @@
     <link rel="stylesheet" href="styles/options.css"/>
     <!-- endbuild -->
 </head>
-<body ng-app="charttab">
+<body ng-app="charttab" ng-controller="OptionsCtrl" class="options">
+
+    <file id="file" ng-model="importFile" ng-change="importData()" accept="application/json"></file>
+
+    <md-list>
+        <md-list-item>
+            <p>Backup/Restore:</p>
+            <md-button href="{{exportFile}}" download="charttab-backup_{{today}}.json">
+                <md-icon md-svg-src="images/file-download.svg"></md-icon>
+                Save
+            </md-button>
+            <md-button ng-click="openFile()">
+                <md-icon md-svg-src="images/file-upload.svg"></md-icon>
+                Load
+            </md-button>
+        </md-list-item>
+        <md-divider></md-divider>
+    </md-list>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
@@ -30,6 +47,10 @@
 
     <!-- build:js scripts/options.js -->
     <script src="scripts/app.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/controllers/options.js"></script>
+    <script src="scripts/directives/file.js"></script>
+    <script src="scripts/services/krs.js"></script>
     <!-- endbuild -->
 </body>
 </html>

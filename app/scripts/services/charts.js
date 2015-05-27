@@ -4,6 +4,7 @@ angular.module('charttab').service('charts',
     function ($q, moment, krs, config) {
 
         var defaultOptions = {
+            bezierCurve: false,
             animation: false,
             scaleOverride: true,
             scaleStepWidth: 1,

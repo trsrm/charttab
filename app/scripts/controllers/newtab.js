@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('charttab').controller('PageCtrl',
+angular.module('charttab').controller('NewTabCtrl',
     function ($scope, $mdDialog, charts) {
 
         $scope.addKr = function (event) {
