@@ -1,19 +1,19 @@
 'use strict';
 
 angular.module('charttab').controller('UpdateValueCtrl',
-    function ($scope, $mdDialog, moment, config, krIndex, result, units, krs) {
+    function ($scope, $mdDialog, moment, config, krs, chartData, date, result) {
 
         $scope.data = {
-            date: moment().format(config.dateFormat),
+            date: date,
             value: result
         };
 
-        $scope.units = units;
+        $scope.chartData = chartData;
 
         $scope.dateFormat = config.dateFormat;
 
         $scope.add = function () {
-            krs.updateValue(krIndex, $scope.data.date, $scope.data.value).then($mdDialog.hide);
+            krs.updateValue(chartData.id, $scope.data.date, $scope.data.value).then($mdDialog.hide);
         };
 
         $scope.cancel = $mdDialog.hide;

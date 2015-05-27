@@ -8,7 +8,7 @@
                 <md-button ng-disabled="true">
                     Edit
                 </md-button>
-                <md-button ng-click="delete($event)">
+                <md-button ng-click="remove($event)">
                     Delete
                 </md-button>
             </div>
@@ -17,7 +17,8 @@
                 <h2 class="title">{{data.title}}</h2>
             </div>
         </div>
-        <canvas class="chart chart-line" data="data.data" labels="data.labels" options="data.options">
+        <canvas class="chart chart-line"
+                data="data.data" labels="data.labels" options="data.options" click="chartClick">
         </canvas>
     </md-card-content>
 </md-card>

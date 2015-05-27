@@ -6,9 +6,9 @@
         <md-dialog-content class="update-value" layout="row">
             <md-input-container flex="25">
                 <label>Value</label>
-                <input type="number" ng-model="data.value" min="1" max="1000" autocomplete="off" required>
+                <input type="number" ng-model="data.value" min="0" max="{{chartData.goal}}" autocomplete="off" required>
             </md-input-container>
-            <span class="input-description" flex="35">{{units}}</span>
+            <span class="input-description" flex="35">{{chartData.units}}</span>
             <md-input-container flex="40">
                 <label>Date</label>
                 <span class="md-placeholder">{{dateFormat}}</span>

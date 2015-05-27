@@ -8,23 +8,28 @@ angular.module('charttab').directive('chart',
             scope: {
                 data: '='
             },
-            controller: function ($scope, $mdDialog) {
+            controller: function ($scope, $mdDialog, moment, config) {
 
-                $scope.updateValue = function (event) {
+                var updateValueDialog = function (event, result, date) {
                     $mdDialog.show({
                         templateUrl: '/views/update-value.html',
                         controller: 'UpdateValueCtrl',
                         targetEvent: event,
                         focusOnOpen: false,
                         locals: {
-                            krIndex: $scope.data.id,
-                            result: $scope.data.result,
-                            units: $scope.data.units
+                            chartData: $scope.data,
+                            date: date,
+                            result: result
                         }
                     });
                 };
 
-                $scope.delete = function (event) {
+                $scope.updateValue = function (event) {
+                    var today = moment().format(config.dateFormat);
+                    updateValueDialog(event, $scope.data.result, today);
+                };
+
+                $scope.remove = function (event) {
                     $mdDialog.show({
                         templateUrl: '/views/delete-confirm.html',
                         controller: 'DeleteConfirmCtrl',
@@ -35,6 +40,13 @@ angular.module('charttab').directive('chart',
                             title: $scope.data.title
                         }
                     });
+                };
+
+                $scope.chartClick = function (elements, event) {
+                    if (!elements.length) return;
+                    var point = elements[0];
+                    var date = moment(point.label, config.dateFormat).subtract(1, 'days').format(config.dateFormat);
+                    updateValueDialog(event, point.value, date);
                 };
             }
         };

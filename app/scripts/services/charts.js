@@ -11,8 +11,9 @@ angular.module('charttab').service('charts',
             scaleStartValue: 0,
             showScale: false,
             pointDotRadius: 3,
-            pointHitDetectionRadius: 3,
-            showTooltips: false
+            pointHitDetectionRadius: 5,
+            tooltipFillColor: 'transparent',
+            tooltipFontColor: 'transparent'
         };
 
         /**
