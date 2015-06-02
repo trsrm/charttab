@@ -12,7 +12,7 @@ angular.module('charttab').controller('UpdateValueCtrl',
 
         $scope.dateFormat = config.dateFormat;
 
-        $scope.add = function () {
+        $scope.update = function () {
             krs.updateValue(chartData.id, $scope.data.date, $scope.data.value).then($mdDialog.hide);
         };
 

@@ -16,7 +16,7 @@
 <body ng-app="charttab" ng-controller="NewTabCtrl">
 
     <div layout="row" layout-wrap>
-        <div flex="20" flex-lg="33" flex-md="50" flex-sm="100" ng-repeat="chart in charts">
+        <div flex="25" flex-lg="33" flex-md="50" flex-sm="100" ng-repeat="chart in charts">
             <chart data="chart"></chart>
         </div>
     </div>
@@ -48,6 +48,7 @@
     <script src="scripts/directives/chart.js"></script>
     <script src="scripts/services/krs.js"></script>
     <script src="scripts/services/charts.js"></script>
+    <script src="scripts/services/uuid.js"></script>
     <!-- endbuild -->
 
     <!-- build:dev -->

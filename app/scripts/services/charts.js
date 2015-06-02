@@ -25,14 +25,13 @@ angular.module('charttab').service('charts',
             krs.getAll().then(function (krsData) {
                 var charts = [];
 
-                krsData.forEach(function (kr, index) {
+                angular.forEach(krsData, function (kr, id) {
                     var chart = angular.extend({
-                        id: index,
+                        id: id,
                         labels: [],
                         data: [[]],
                         options: angular.extend({
-                            scaleSteps: kr.goal,
-                            tooltipTemplate: '<%=label%>: <%= value %> ' + kr.units
+                            scaleSteps: kr.goal
                         }, defaultOptions)
                     }, kr);
 
@@ -47,6 +46,12 @@ angular.module('charttab').service('charts',
                     });
 
                     charts.push(chart);
+                });
+
+                charts = charts.sort(function (a, b) {
+                    if (a.title.localeCompare(b.title) < 0) return -1;
+                    if (a.title.localeCompare(b.title) > 0) return 1;
+                    return 0;
                 });
 
                 deferred.resolve(charts);

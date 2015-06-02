@@ -16,8 +16,7 @@ angular.module('charttab').controller('NewTabCtrl',
             $scope.charts = chartsData;
         });
 
-        chrome.storage.onChanged.addListener(function (changes) {
-            if (!changes.krs) return;
+        chrome.storage.onChanged.addListener(function () {
             charts.getAll().then(function (chartsData) {
                 $scope.charts = chartsData;
             });
