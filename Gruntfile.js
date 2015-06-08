@@ -164,6 +164,11 @@ module.exports = function (grunt) {
                     cwd: 'dist',
                     src: '*.html',
                     dest: 'dist'
+                }, {
+                    expand: true,
+                    cwd: 'dist/views',
+                    src: '{,*/}*.html',
+                    dest: 'dist/views'
                 }]
             }
         },
@@ -193,6 +198,7 @@ module.exports = function (grunt) {
                         '*.{ico,png,txt}',
                         'images/{,*/}*.{webp,gif}',
                         '{,*/}*.html',
+                        'views/{,*/}*.html',
                         'styles/fonts/{,*/}*.*',
                         '_locales/{,*/}*.json'
                     ]

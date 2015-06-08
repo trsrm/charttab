@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('charttab').service('storage',
-    function ($q, uid) {
+    function ($q) {
 
         var dataFile = null;
 

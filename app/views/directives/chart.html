@@ -4,17 +4,26 @@
             <div class="actions" layout="row" layout-align="center center">
                 <md-button ng-click="updateValue($event)">
                     Results
+                    <md-tooltip md-direction="bottom" md-autohide="true" md-delay="800">
+                        Update current results
+                    </md-tooltip>
                 </md-button>
                 <md-button ng-disabled="true">
                     Edit
+                    <md-tooltip md-direction="bottom" md-autohide="true" md-delay="800">
+                        Edit chart details
+                    </md-tooltip>
                 </md-button>
                 <md-button ng-click="remove($event)">
                     Delete
+                    <md-tooltip md-direction="bottom" md-autohide="true" md-delay="800">
+                        Delete chart completely?
+                    </md-tooltip>
                 </md-button>
             </div>
             <div class="details">
-                <p class="result">{{data.result}} of {{data.goal}} {{data.units}}</p>
-                <h2 class="title">{{data.title}}</h2>
+                <p class="result">{{::data.result}} of {{::data.goal}} {{::data.units}}</p>
+                <h2 class="title">{{::data.title}}</h2>
             </div>
         </div>
         <canvas class="chart chart-line"

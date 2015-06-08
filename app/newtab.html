@@ -11,19 +11,58 @@
     <!-- build:css styles/newtab.css -->
     <link rel="stylesheet" href="styles/fonts.css"/>
     <link rel="stylesheet" href="styles/newtab.css"/>
+    <link rel="stylesheet" href="styles/charts.css"/>
     <!-- endbuild -->
 </head>
-<body ng-app="charttab" ng-controller="NewTabCtrl">
+<body ng-app="charttab" ng-controller="NewTabCtrl" layout="column" ng-show="ready">
 
-    <div layout="row" layout-wrap>
-        <div flex="25" flex-lg="33" flex-md="50" flex-sm="100" ng-repeat="chart in charts">
-            <chart data="chart"></chart>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button ng-click="page = pages.charts">
+                <md-icon md-svg-src="images/charts.svg"></md-icon>
+                Charts
+            </md-button>
+            <md-button ng-click="page = pages.bookmarks">
+                <md-icon md-svg-src="images/bookmark.svg"></md-icon>
+                Bookmarks
+            </md-button>
+            <md-button ng-click="page = pages.apps">
+                <md-icon md-svg-src="images/apps.svg"></md-icon>
+                Apps
+            </md-button>
+            <span flex></span>
+            <md-button ng-click="addKr($event)" ng-if="page === pages.charts">
+                <md-icon md-svg-src="images/add.svg"></md-icon>
+                Add chart
+            </md-button>
         </div>
-    </div>
+    </md-toolbar>
 
-    <md-button class="md-primary md-fab md-fab-bottom-right" aria-label="Add key result" ng-click="addKr($event)">
-        <md-icon md-svg-src="images/add.svg"></md-icon>
-    </md-button>
+    <md-content ng-if="page === pages.charts" flex>
+        <div layout="row" layout-wrap>
+            <div flex="25" flex-lg="33" flex-md="50" flex-sm="100" ng-repeat="chart in charts track by chart.id">
+                <chart data="chart"></chart>
+            </div>
+        </div>
+        <div class="page-description" layout="column" layout-align="center center"  ng-if="!charts.length">
+            <h1 class="md-display-1">NO CHARTS YET</h1>
+            <h2 class="md-headline">Add a new one by pressing the "ADD CHART" button on the top.</h2>
+        </div>
+    </md-content>
+
+    <md-content ng-if="page === pages.bookmarks" flex>
+        <div class="page-description" layout="column" layout-align="center center">
+            <h1 class="md-display-1">BOOKMARKS ARE COMING SOON</h1>
+            <h2 class="md-headline">It will be a bookmarks list for quick access to your favorite websites.</h2>
+        </div>
+    </md-content>
+
+    <md-content ng-if="page === pages.apps" flex>
+        <div class="page-description" layout="column" layout-align="center center">
+            <h1 class="md-display-1">APPS ARE COMING SOON</h1>
+            <h2 class="md-headline">It will be a list of ready-to-launch applications installed in your Chrome.</h2>
+        </div>
+    </md-content>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->

@@ -1,0 +1,64 @@
+/* CHARTS */
+
+.chart {
+    position: relative;
+    overflow: hidden;
+}
+
+.chart .content {
+    padding-top: 0;
+}
+
+.chart .header {
+    height: 26px;
+    border-bottom: 2px solid #97bbcd;
+    position: relative;
+    overflow: hidden;
+    padding-top: 16px;
+}
+
+.chart .actions,
+.chart .details {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 42px;
+    transition: 0.2s;
+    transition-delay: 0.4s;
+}
+
+.chart .actions {
+    top: -42px;
+}
+
+.chart:hover .actions {
+    top: 0;
+}
+
+.chart .details {
+    padding-top: 16px;
+    top: 0;
+}
+
+.chart:hover .details {
+    top: 42px;
+}
+
+.chart .title {
+    font-weight: 400;
+    margin: 0;
+    line-height: 1em;
+    font-size: 16px;
+    padding-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chart .result {
+    margin: 1px 0 0 5px;
+    float: right;
+    line-height: 1em;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.45);
+}
