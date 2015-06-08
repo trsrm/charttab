@@ -101,4 +101,17 @@ angular.module('charttab').service('krs',
             return deferred.promise;
         };
 
+        /**
+         * Get the last value from results.
+         * @param {array} results
+         * @return {number}
+         */
+        this.getLastValue = function (results) {
+            for (var i = 0; i < results.length; i++) {
+                if (results[i].day === moment().startOf('isoWeek').format(config.dateFormat)) {
+                    return results[i].value;
+                }
+            }
+            return 0;
+        };
     });

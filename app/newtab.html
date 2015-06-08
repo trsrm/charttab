@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="styles/charts.css"/>
     <!-- endbuild -->
 </head>
-<body ng-app="charttab" ng-controller="NewTabCtrl" layout="column" ng-show="ready">
+<body ng-app="charttab" ng-controller="NewTabCtrl" layout="column">
 
     <md-toolbar>
         <div class="md-toolbar-tools">
@@ -44,7 +44,7 @@
                 <chart data="chart"></chart>
             </div>
         </div>
-        <div class="page-description" layout="column" layout-align="center center"  ng-if="!charts.length">
+        <div class="page-description" layout="column" layout-align="center center" ng-if="!charts.length && ready">
             <h1 class="md-display-1">NO CHARTS YET</h1>
             <h2 class="md-headline">Add a new one by pressing the "ADD CHART" button on the top.</h2>
         </div>
