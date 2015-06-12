@@ -40,8 +40,8 @@
 
     <md-content ng-if="page === pages.charts" flex>
         <div layout="row" layout-wrap>
-            <div flex="25" flex-lg="33" flex-md="50" flex-sm="100" ng-repeat="chart in charts track by chart.id">
-                <chart data="chart"></chart>
+            <div flex="{{chartFlex}}" ng-repeat="chart in charts track by chart.id">
+                <chart data="chart" height="chartHeight"></chart>
             </div>
         </div>
         <div class="page-description" layout="column" layout-align="center center" ng-if="!charts.length && ready">

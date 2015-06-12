@@ -1,24 +1,29 @@
 /* CHARTS */
 
-.chart {
+.chart-card {
     position: relative;
     overflow: hidden;
 }
 
-.chart .content {
-    padding-top: 0;
+.chart-card .content {
+    padding: 0 15px 6px;
 }
 
-.chart .header {
+.chart-card .header {
     height: 26px;
-    border-bottom: 2px solid #97bbcd;
+    border-bottom: 2px solid #eaf1f5;
     position: relative;
     overflow: hidden;
     padding-top: 16px;
 }
 
-.chart .actions,
-.chart .details {
+.chart-card .chart-container {
+    position: relative;
+    top: -5px;
+}
+
+.chart-card .actions,
+.chart-card .details {
     position: absolute;
     left: 0;
     right: 0;
@@ -27,24 +32,24 @@
     transition-delay: 0.4s;
 }
 
-.chart .actions {
+.chart-card .actions {
     top: -42px;
 }
 
-.chart:hover .actions {
+.chart-card:hover .actions {
     top: 0;
 }
 
-.chart .details {
+.chart-card .details {
     padding-top: 16px;
     top: 0;
 }
 
-.chart:hover .details {
+.chart-card:hover .details {
     top: 42px;
 }
 
-.chart .title {
+.chart-card .title {
     font-weight: 400;
     margin: 0;
     line-height: 1em;
@@ -53,9 +58,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: rgba(0, 0, 0, 0.8);
 }
 
-.chart .result {
+.chart-card .result {
     margin: 1px 0 0 5px;
     float: right;
     line-height: 1em;

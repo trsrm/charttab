@@ -1,4 +1,4 @@
-<md-card class="chart">
+<md-card class="chart-card">
     <md-card-content class="content">
         <div class="header">
             <div class="actions" layout="row" layout-align="center center">
@@ -26,7 +26,7 @@
                 <h2 class="title">{{::data.title}}</h2>
             </div>
         </div>
-        <canvas class="chart chart-line"
+        <canvas class="chart chart-line" height="{{height}}"
                 data="data.data" labels="data.labels" options="data.options" click="chartClick">
         </canvas>
     </md-card-content>

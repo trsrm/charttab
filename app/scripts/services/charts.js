@@ -1,19 +1,20 @@
 'use strict';
 
 angular.module('charttab').service('charts',
-    function ($q, moment, krs, config) {
+    function ($q, $window, moment, krs, config) {
 
         var defaultOptions = {
-            bezierCurve: false,
             animation: false,
-            scaleOverride: true,
-            scaleStepWidth: 1,
-            scaleStartValue: 0,
             showScale: false,
-            pointDotRadius: 3,
-            pointHitDetectionRadius: 5,
+            scaleOverride: true,
+            scaleSteps: 10,
+            scaleStartValue: 0,
+            maintainAspectRatio: false,
             tooltipFillColor: 'transparent',
-            tooltipFontColor: 'transparent'
+            tooltipFontColor: 'transparent',
+            bezierCurve: false,
+            pointDotRadius: 3,
+            pointHitDetectionRadius: 5
         };
 
         /**
@@ -31,7 +32,7 @@ angular.module('charttab').service('charts',
                         labels: [],
                         data: [[]],
                         options: angular.extend({
-                            scaleSteps: kr.goal
+                            scaleStepWidth: kr.goal / 10
                         }, defaultOptions)
                     }, kr);
 
@@ -58,6 +59,45 @@ angular.module('charttab').service('charts',
             });
 
             return deferred.promise;
+        };
+
+        /**
+         * Detect best height to fit the screen
+         * @param {number} chartsNumber
+         * @return {number}
+         */
+        this.getBestHeight = function (chartsNumber) {
+            var window = $window.innerHeight;
+            var navbar = 64;
+            var heading = 48;
+            var spacings = 26;
+            var rowsNumber;
+            if (chartsNumber < 7) {
+                rowsNumber = 2;
+            } else if (chartsNumber < 13) {
+                rowsNumber = 3;
+            } else {
+                rowsNumber = 4;
+            }
+            return Math.floor((window - navbar) / rowsNumber) - heading - spacings;
+        };
+
+        /**
+         * Detect best flex to fit the screen
+         * @param {number} chartsNumber
+         * @return {number}
+         */
+        this.getBestFlex = function (chartsNumber) {
+            console.log(chartsNumber);
+            if (chartsNumber < 5) {
+                return 50;
+            } else if (chartsNumber < 10) {
+                return 33;
+            } else if (chartsNumber < 13) {
+                return 25;
+            } else {
+                return 20;
+            }
         };
 
     });

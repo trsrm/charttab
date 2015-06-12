@@ -6,7 +6,8 @@ angular.module('charttab').directive('chart',
             templateUrl: '/views/directives/chart.html',
             restrict: 'E',
             scope: {
-                data: '='
+                data: '=',
+                height: '='
             },
             controller: function ($scope, $mdDialog, moment, config) {
 

@@ -25,10 +25,18 @@ angular.module('charttab').controller('NewTabCtrl',
             $scope.ready = true;
         });
 
+        // redraw charts on stored collection changes:
         chrome.storage.onChanged.addListener(function () {
             charts.getAll().then(function (chartsData) {
                 $scope.charts = chartsData;
             });
+        });
+
+        // set flex and height for charts to best fit the screen:
+        $scope.$watch('charts.length', function (chartsNumber) {
+            if (!chartsNumber) return;
+            $scope.chartHeight = charts.getBestHeight(chartsNumber);
+            $scope.chartFlex = charts.getBestFlex(chartsNumber);
         });
 
     });
