@@ -38,7 +38,7 @@
         </div>
     </md-toolbar>
 
-    <md-content ng-if="page === pages.charts" flex>
+    <md-content ng-show="page === pages.charts" class="ng-hide" flex>
         <div layout="row" layout-wrap>
             <div flex="{{chartFlex}}" ng-repeat="chart in charts track by chart.id">
                 <chart data="chart" height="chartHeight"></chart>
@@ -50,14 +50,14 @@
         </div>
     </md-content>
 
-    <md-content ng-if="page === pages.bookmarks" flex>
+    <md-content ng-show="page === pages.bookmarks" class="ng-hide" flex>
         <div class="page-description" layout="column" layout-align="center center">
             <h1 class="md-display-1">BOOKMARKS ARE COMING SOON</h1>
             <h2 class="md-headline">It will be a bookmarks list for quick access to your favorite websites.</h2>
         </div>
     </md-content>
 
-    <md-content ng-if="page === pages.apps" flex>
+    <md-content ng-show="page === pages.apps" class="ng-hide" flex>
         <div class="page-description" layout="column" layout-align="center center">
             <h1 class="md-display-1">APPS ARE COMING SOON</h1>
             <h2 class="md-headline">It will be a list of ready-to-launch applications installed in your Chrome.</h2>
