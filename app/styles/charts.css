@@ -1,67 +1,11 @@
 /* CHARTS */
 
-.chart-card {
-    position: relative;
-    overflow: hidden;
-}
-
-.chart-card .content {
-    padding: 0 15px 6px;
-}
-
-.chart-card .header {
-    height: 26px;
-    border-bottom: 2px solid #eaf1f5;
-    position: relative;
-    overflow: hidden;
-    padding-top: 16px;
-}
-
-.chart-card .chart-container {
+.item-card .chart-container {
     position: relative;
     top: -5px;
 }
 
-.chart-card .actions,
-.chart-card .details {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 42px;
-    transition: 0.2s;
-    transition-delay: 0.4s;
-}
-
-.chart-card .actions {
-    top: -42px;
-}
-
-.chart-card:hover .actions {
-    top: 0;
-}
-
-.chart-card .details {
-    padding-top: 16px;
-    top: 0;
-}
-
-.chart-card:hover .details {
-    top: 42px;
-}
-
-.chart-card .title {
-    font-weight: 400;
-    margin: 0;
-    line-height: 1em;
-    font-size: 16px;
-    padding-bottom: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: rgba(0, 0, 0, 0.8);
-}
-
-.chart-card .result {
+.item-card .result {
     margin: 1px 0 0 5px;
     float: right;
     line-height: 1em;

@@ -2,32 +2,26 @@
     <md-card-content class="content">
         <div class="header">
             <div class="actions" layout="row" layout-align="center center">
-                <md-button ng-click="updateValue($event)">
-                    Results
-                    <md-tooltip md-direction="bottom" md-autohide="true" md-delay="800">
-                        Update current results
-                    </md-tooltip>
-                </md-button>
                 <md-button ng-click="edit($event)">
                     Edit
                     <md-tooltip md-direction="bottom" md-autohide="true" md-delay="800">
-                        Edit chart details
+                        Edit bookmark
                     </md-tooltip>
                 </md-button>
                 <md-button ng-click="remove($event)">
                     Delete
                     <md-tooltip md-direction="bottom" md-autohide="true" md-delay="800">
-                        Delete chart completely?
+                        Delete bookmark?
                     </md-tooltip>
                 </md-button>
             </div>
             <div class="details">
-                <p class="result">{{data.result}} of {{data.goal}} {{data.units}}</p>
-                <h2 class="title">{{data.title}}</h2>
+                <h2 class="title">
+                    <img class="favicon" src="http://google.com/s2/favicons?domain={{host}}"/>
+                    {{data.title}}
+                </h2>
             </div>
         </div>
-        <canvas class="chart chart-line" height="{{height}}"
-                data="data.data" labels="data.labels" options="data.options" click="chartClick">
-        </canvas>
+        <a href="{{data.url}}" class="thumbnail" ng-style="thumbnailStyle"></a>
     </md-card-content>
 </md-card>

@@ -1,23 +1,21 @@
 'use strict';
 
 angular.module('charttab').controller('KeyResultFormCtrl',
-    function ($scope, ui, krs, config, krData) {
+    function ($scope, ui, krs, config) {
 
-        $scope.kr = krData || {};
+        $scope.kr = this.kr || {};
 
-        $scope.isEdit = Boolean(krData);
+        $scope.isEdit = Boolean(this.kr);
 
         $scope.dateFormat = config.dateFormat;
 
         $scope.submit = function () {
             var kr = angular.copy($scope.kr);
-            var promise;
             if ($scope.isEdit) {
-                promise = krs.update(kr.id, kr);
+                krs.update(kr.id, kr).then(ui.hideDialog);
             } else {
-                promise = krs.add(kr);
+                krs.add(kr).then(ui.hideDialog);
             }
-            promise.then(ui.hideDialog);
         };
 
         $scope.cancel = ui.hideDialog;

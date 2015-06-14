@@ -1,0 +1,14 @@
+/* CHARTS */
+
+.item-card .thumbnail {
+    display: block;
+    margin-bottom: 10px;
+    background-size: cover;
+    background-position: top center;
+}
+
+.item-card .favicon {
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+}

@@ -64,8 +64,12 @@ md-toolbar.md-default-theme {
 
 /* DIALOGS */
 
-.add-key-result {
+.kr-form {
     width: 320px;
+}
+
+.bookmarks-form {
+    width: 400px;
 }
 
 .update-value {

@@ -11,7 +11,9 @@
     <!-- build:css styles/newtab.css -->
     <link rel="stylesheet" href="styles/fonts.css"/>
     <link rel="stylesheet" href="styles/newtab.css"/>
+    <link rel="stylesheet" href="styles/items.css"/>
     <link rel="stylesheet" href="styles/charts.css"/>
+    <link rel="stylesheet" href="styles/bookmarks.css"/>
     <!-- endbuild -->
 </head>
 <body ng-app="charttab" ng-controller="NewTabCtrl" layout="column">
@@ -35,10 +37,14 @@
                 <md-icon md-svg-src="images/add.svg"></md-icon>
                 Add chart
             </md-button>
+            <md-button ng-click="addBookmark($event)" ng-if="page === pages.bookmarks">
+                <md-icon md-svg-src="images/add.svg"></md-icon>
+                Add bookmark
+            </md-button>
         </div>
     </md-toolbar>
 
-    <md-content ng-show="page === pages.charts" class="ng-hide" flex>
+    <md-content ng-if="page === pages.charts" flex>
         <div layout="row" layout-wrap>
             <div flex="{{chartFlex}}" ng-repeat="chart in charts track by chart.id">
                 <chart data="chart" height="chartHeight"></chart>
@@ -46,20 +52,28 @@
         </div>
         <div class="page-description" layout="column" layout-align="center center" ng-if="!charts.length && ready">
             <h1 class="md-display-1">NO CHARTS YET</h1>
+
             <h2 class="md-headline">Add a new one by pressing the "ADD CHART" button on the top.</h2>
         </div>
     </md-content>
 
-    <md-content ng-show="page === pages.bookmarks" class="ng-hide" flex>
-        <div class="page-description" layout="column" layout-align="center center">
-            <h1 class="md-display-1">BOOKMARKS ARE COMING SOON</h1>
-            <h2 class="md-headline">It will be a bookmarks list for quick access to your favorite websites.</h2>
+    <md-content ng-if="page === pages.bookmarks" flex>
+        <div layout="row" layout-wrap>
+            <div flex="{{bookmarkFlex}}" ng-repeat="bookmark in bookmarks track by bookmark.id">
+                <bookmark data="bookmark" height="bookmarkHeight"></bookmark>
+            </div>
+        </div>
+        <div class="page-description" layout="column" layout-align="center center" ng-if="!bookmarks.length && ready">
+            <h1 class="md-display-1">NO BOOKMARKS YET</h1>
+
+            <h2 class="md-headline">Add a new one by pressing the "ADD BOOKMARK" button on the top.</h2>
         </div>
     </md-content>
 
-    <md-content ng-show="page === pages.apps" class="ng-hide" flex>
+    <md-content ng-if="page === pages.apps" flex>
         <div class="page-description" layout="column" layout-align="center center">
             <h1 class="md-display-1">APPS ARE COMING SOON</h1>
+
             <h2 class="md-headline">It will be a list of ready-to-launch applications installed in your Chrome.</h2>
         </div>
     </md-content>
@@ -82,10 +96,14 @@
     <script src="scripts/config.js"></script>
     <script src="scripts/controllers/newtab.js"></script>
     <script src="scripts/controllers/key-result-form.js"></script>
+    <script src="scripts/controllers/bookmark-form.js"></script>
     <script src="scripts/controllers/update-value.js"></script>
-    <script src="scripts/controllers/delete-confirm.js"></script>
+    <script src="scripts/controllers/delete-bookmark.js"></script>
+    <script src="scripts/controllers/delete-kr.js"></script>
+    <script src="scripts/directives/bookmark.js"></script>
     <script src="scripts/directives/chart.js"></script>
     <script src="scripts/services/krs.js"></script>
+    <script src="scripts/services/bookmarks.js"></script>
     <script src="scripts/services/charts.js"></script>
     <script src="scripts/services/ui.js"></script>
     <script src="scripts/services/uuid.js"></script>

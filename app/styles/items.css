@@ -1,0 +1,57 @@
+/* ITEMS */
+
+.item-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.item-card .content {
+    padding: 0 15px 6px;
+}
+
+.item-card .header {
+    height: 26px;
+    border-bottom: 2px solid #eaf1f5;
+    position: relative;
+    overflow: hidden;
+    padding-top: 16px;
+}
+
+.item-card .actions,
+.item-card .details {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 42px;
+    transition: 0.2s;
+    transition-delay: 0.4s;
+}
+
+.item-card .actions {
+    top: -42px;
+}
+
+.item-card:hover .actions {
+    top: 0;
+}
+
+.item-card .details {
+    padding-top: 16px;
+    top: 0;
+}
+
+.item-card:hover .details {
+    top: 42px;
+}
+
+.item-card .title {
+    font-weight: 400;
+    margin: 0;
+    line-height: 1em;
+    font-size: 16px;
+    padding-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgba(0, 0, 0, 0.8);
+}

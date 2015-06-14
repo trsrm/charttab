@@ -38,17 +38,16 @@ angular.module('charttab').directive('chart',
                     ui.showDialog(event, '/views/key-result-form.html', {
                         controller: 'KeyResultFormCtrl',
                         locals: {
-                            krData: angular.copy($scope.data)
+                            kr: angular.copy($scope.data)
                         }
                     });
                 };
 
                 $scope.remove = function (event) {
                     ui.showDialog(event, '/views/delete-confirm.html', {
-                        controller: 'DeleteConfirmCtrl',
+                        controller: 'DeleteKrCtrl',
                         locals: {
-                            krIndex: $scope.data.id,
-                            title: $scope.data.title
+                            kr: $scope.data
                         }
                     });
                 };

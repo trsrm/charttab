@@ -14,7 +14,8 @@ angular.module('charttab').service('ui',
                 templateUrl: url,
                 controller: 'UpdateValueCtrl',
                 targetEvent: event,
-                focusOnOpen: false
+                focusOnOpen: false,
+                bindToController: true
             }, options);
             $mdDialog.show(options);
         };
