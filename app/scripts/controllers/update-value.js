@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('charttab').controller('UpdateValueCtrl',
-    function ($scope, $mdDialog, moment, config, krs, chartData, date, result) {
+    function ($scope, ui, moment, config, krs, chartData, date, result) {
 
         // pre-fill previous value for a new week:
         var nextMonday = moment().endOf('isoWeek');
@@ -19,9 +19,9 @@ angular.module('charttab').controller('UpdateValueCtrl',
         $scope.dateFormat = config.dateFormat;
 
         $scope.update = function () {
-            krs.updateValue(chartData.id, $scope.data.date, $scope.data.value).then($mdDialog.hide);
+            krs.updateValue(chartData.id, $scope.data.date, $scope.data.value).then(ui.hideDialog);
         };
 
-        $scope.cancel = $mdDialog.hide;
+        $scope.cancel = ui.hideDialog;
 
     });

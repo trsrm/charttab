@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('charttab').controller('DeleteConfirmCtrl',
-    function ($scope, $mdDialog, krIndex, title, krs) {
+    function ($scope, ui, krIndex, title, krs) {
 
         $scope.title = title;
 
         $scope.remove = function () {
-            krs.remove(krIndex).then($mdDialog.hide);
+            krs.remove(krIndex).then(ui.hideDialog);
         };
 
-        $scope.cancel = $mdDialog.hide;
+        $scope.cancel = ui.hideDialog;
 
     });

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('charttab').controller('NewTabCtrl',
-    function ($scope, $mdDialog, charts) {
+    function ($scope, ui, charts) {
 
         $scope.pages = {
             charts: 1,
@@ -12,11 +12,8 @@ angular.module('charttab').controller('NewTabCtrl',
         $scope.page = $scope.pages.charts;
 
         $scope.addKr = function (event) {
-            $mdDialog.show({
-                templateUrl: '/views/add-key-result.html',
-                controller: 'AddKeyResultCtrl',
-                targetEvent: event,
-                focusOnOpen: false
+            ui.showDialog(event, '/views/key-result-form.html', {
+                controller: 'KeyResultFormCtrl'
             });
         };
 

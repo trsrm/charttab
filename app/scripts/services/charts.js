@@ -88,7 +88,6 @@ angular.module('charttab').service('charts',
          * @return {number}
          */
         this.getBestFlex = function (chartsNumber) {
-            console.log(chartsNumber);
             if (chartsNumber < 5) {
                 return 50;
             } else if (chartsNumber < 10) {

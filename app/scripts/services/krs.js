@@ -5,27 +5,27 @@ angular.module('charttab').service('krs',
 
         /**
          * Add new key result.
-         * @param {object} kr
+         * @param {object} data
          * @return {Promise}
          */
-        this.add = function (kr) {
+        this.add = function (data) {
             var deferred = $q.defer();
 
-            kr.results = [];
+            data.results = [];
 
-            var start = moment(kr.start, config.dateFormat).add(1, 'weeks').startOf('isoWeek');
-            var end = moment(kr.end, config.dateFormat).add(1, 'day');
+            var start = moment(data.start, config.dateFormat).add(1, 'weeks').startOf('isoWeek');
+            var end = moment(data.end, config.dateFormat).add(1, 'day');
             while (start.isBefore(end)) {
-                kr.results.push({
+                data.results.push({
                     day: start.format(config.dateFormat),
                     value: 0
                 });
                 start.add(1, 'weeks');
             }
 
-            var data = {};
-            data[uid()] = kr;
-            chrome.storage.sync.set(data, deferred.resolve);
+            var item = {};
+            item[uid()] = data;
+            chrome.storage.sync.set(item, deferred.resolve);
 
             return deferred.promise;
         };
@@ -61,6 +61,42 @@ angular.module('charttab').service('krs',
         };
 
         /**
+         * Update key result data.
+         * @param {number} id
+         * @param {object} data
+         * @return {Promise}
+         */
+        this.update = function (id, data) {
+            var deferred = $q.defer();
+
+            this.getById(id).then(function (kr) {
+
+                kr.title = data.title;
+                kr.goal = data.goal;
+                kr.units = data.units;
+                
+                var item = {};
+                item[id] = kr;
+                chrome.storage.sync.set(item, deferred.resolve);
+            });
+
+            return deferred.promise;
+        };
+
+        /**
+         * Delete key result.
+         * @param {number} id
+         * @return {Promise}
+         */
+        this.remove = function (id) {
+            var deferred = $q.defer();
+
+            chrome.storage.sync.remove(id, deferred.resolve);
+
+            return deferred.promise;
+        };
+
+        /**
          * Update value of key result.
          * @param {number} id
          * @param {string} date
@@ -80,23 +116,10 @@ angular.module('charttab').service('krs',
                     }
                 }
 
-                var data = {};
-                data[id] = kr;
-                chrome.storage.sync.set(data, deferred.resolve);
+                var item = {};
+                item[id] = kr;
+                chrome.storage.sync.set(item, deferred.resolve);
             });
-
-            return deferred.promise;
-        };
-
-        /**
-         * Delete key result.
-         * @param {number} id
-         * @return {Promise}
-         */
-        this.remove = function (id) {
-            var deferred = $q.defer();
-
-            chrome.storage.sync.remove(id, deferred.resolve);
 
             return deferred.promise;
         };

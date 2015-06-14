@@ -9,36 +9,15 @@ angular.module('charttab').directive('chart',
                 data: '=',
                 height: '='
             },
-            controller: function ($scope, $mdDialog, moment, config) {
+            controller: function ($scope, ui, moment, config) {
 
                 var updateValueDialog = function (event, result, date) {
-                    $mdDialog.show({
-                        templateUrl: '/views/update-value.html',
+                    ui.showDialog(event, '/views/update-value.html', {
                         controller: 'UpdateValueCtrl',
-                        targetEvent: event,
-                        focusOnOpen: false,
                         locals: {
                             chartData: $scope.data,
                             date: date,
                             result: result
-                        }
-                    });
-                };
-
-                $scope.updateValue = function (event) {
-                    var today = moment().format(config.dateFormat);
-                    updateValueDialog(event, $scope.data.result, today);
-                };
-
-                $scope.remove = function (event) {
-                    $mdDialog.show({
-                        templateUrl: '/views/delete-confirm.html',
-                        controller: 'DeleteConfirmCtrl',
-                        targetEvent: event,
-                        focusOnOpen: false,
-                        locals: {
-                            krIndex: $scope.data.id,
-                            title: $scope.data.title
                         }
                     });
                 };
@@ -49,6 +28,31 @@ angular.module('charttab').directive('chart',
                     var date = moment(point.label, config.dateFormat).subtract(1, 'days').format(config.dateFormat);
                     updateValueDialog(event, point.value, date);
                 };
+
+                $scope.updateValue = function (event) {
+                    var today = moment().format(config.dateFormat);
+                    updateValueDialog(event, $scope.data.result, today);
+                };
+
+                $scope.edit = function (event) {
+                    ui.showDialog(event, '/views/key-result-form.html', {
+                        controller: 'KeyResultFormCtrl',
+                        locals: {
+                            krData: angular.copy($scope.data)
+                        }
+                    });
+                };
+
+                $scope.remove = function (event) {
+                    ui.showDialog(event, '/views/delete-confirm.html', {
+                        controller: 'DeleteConfirmCtrl',
+                        locals: {
+                            krIndex: $scope.data.id,
+                            title: $scope.data.title
+                        }
+                    });
+                };
+
             }
         };
     });
