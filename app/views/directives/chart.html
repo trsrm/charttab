@@ -22,12 +22,16 @@
                 </md-button>
             </div>
             <div class="details">
-                <p class="result">{{data.result}} of {{data.goal}} {{data.units}}</p>
+                <p class="result">{{data.result}} of {{data.goal}} {{data.units}} ({{data.progress}})</p>
                 <h2 class="title">{{data.title}}</h2>
             </div>
         </div>
-        <canvas class="chart chart-line" height="{{height}}"
-                data="data.data" labels="data.labels" options="data.options" click="chartClick">
+        <canvas class="chart chart-line"
+                height="{{height}}"
+                chart-data="data.data"
+                chart-labels="data.labels"
+                chart-options="data.options"
+                chart-click="chartClick">
         </canvas>
     </md-card-content>
 </md-card>

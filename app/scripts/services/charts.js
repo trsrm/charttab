@@ -46,6 +46,8 @@ angular.module('charttab').service('charts',
                         }
                     });
 
+                    chart.progress = Math.round(chart.result / chart.goal * 100) + '%';
+
                     charts.push(chart);
                 });
 

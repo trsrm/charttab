@@ -74,7 +74,7 @@ angular.module('charttab').service('krs',
                 kr.title = data.title;
                 kr.goal = data.goal;
                 kr.units = data.units;
-                
+
                 var item = {};
                 item[id] = kr;
                 chrome.storage.sync.set(item, deferred.resolve);
@@ -136,5 +136,23 @@ angular.module('charttab').service('krs',
                 }
             }
             return 0;
+        };
+
+        /**
+         * Get common dates for KRs.
+         * @return {*}
+         */
+        this.getDates = function () {
+            var deferred = $q.defer();
+
+            this.getAll().then(function (krs) {
+                for (var key in krs) {
+                    if (krs.hasOwnProperty(key)) {
+                        deferred.resolve({start: krs[key].start, end: krs[key].end});
+                    }
+                }
+            });
+
+            return deferred.promise;
         };
     });

@@ -2,10 +2,10 @@
   "name": "ChartTab",
   "version": "0.0.0",
   "dependencies": {
-    "angular-material": "0.9.x",
-    "livereload": "2.2.x",
-    "angular-chart.js": "0.7.x",
-    "angular-moment": "0.10.x"
+    "angular-material": "0.11.1",
+    "livereload": "2.2.1",
+    "angular-chart.js": "0.8.4",
+    "angular-moment": "0.10.3"
   },
   "devDependencies": {}
 }

@@ -3,7 +3,14 @@
 angular.module('charttab').controller('KeyResultFormCtrl',
     function ($scope, ui, krs, config) {
 
-        $scope.kr = this.kr || {};
+        if (this.kr) {
+            $scope.kr = this.kr;
+        } else {
+            krs.getDates().then(function (dates) {
+                $scope.kr = dates;
+                console.log($scope.kr);
+            });
+        }
 
         $scope.isEdit = Boolean(this.kr);
 
