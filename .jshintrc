@@ -1,6 +1,6 @@
 {
     "maxerr": 999,
-    "globalstrict": true,
+    "strict": false,
     "browser": true,
     "devel": true,
     "jquery": true,

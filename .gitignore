@@ -4,7 +4,6 @@ temp
 dist
 .sass-cache
 app/bower_components
-test/bower_components
 package
 .idea
 npm-debug.log

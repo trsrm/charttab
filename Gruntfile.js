@@ -1,11 +1,5 @@
 'use strict';
 
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
-
 module.exports = function(grunt) {
 
     // Load grunt tasks automatically
@@ -55,15 +49,6 @@ module.exports = function(grunt) {
                         'app'
                     ]
                 }
-            },
-            test: {
-                options: {
-                    open: false,
-                    base: [
-                        'test',
-                        'app'
-                    ]
-                }
             }
         },
 
@@ -85,13 +70,12 @@ module.exports = function(grunt) {
         // Make sure code styles are up to par and there are no obvious mistakes
         jshint: {
             options: {
-                jshintrc: '.jshintrc',
+                jshintrc: true,
                 reporter: require('jshint-stylish')
             },
             all: [
                 'Gruntfile.js',
-                'app/scripts/{,*/}*.js',
-                'test/spec/{,*/}*.js'
+                'app/scripts/{,*/}*.js'
             ]
         },
 
@@ -212,8 +196,7 @@ module.exports = function(grunt) {
             dist: [
                 'imagemin',
                 'svgmin'
-            ],
-            test: []
+            ]
         },
 
         // Auto buildnumber, exclude debug files. smart builds that event pages
@@ -249,15 +232,6 @@ module.exports = function(grunt) {
             }
         },
 
-        // Jasmine tests:
-        jasmine: {
-            all: {
-                options: {
-                    specs: 'test/spec/{,*/}*.js'
-                }
-            }
-        }
-
     });
 
     grunt.registerTask('debug', function() {
@@ -269,13 +243,6 @@ module.exports = function(grunt) {
             'watch'
         ]);
     });
-
-    grunt.registerTask('test', [
-        'clean:debug',
-        'wiredep',
-        'connect:test',
-        'jasmine'
-    ]);
 
     grunt.registerTask('build', [
         'clean:dist',
@@ -295,7 +262,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', [
         'jshint',
-        'test',
         'build'
     ]);
 };
