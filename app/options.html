@@ -2,56 +2,61 @@
 <html>
 <head>
     <meta charset="utf-8">
+
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
     <!-- endbower -->
     <!-- endbuild -->
+
     <!-- build:css styles/options.css -->
     <link rel="stylesheet" href="styles/fonts.css"/>
     <link rel="stylesheet" href="styles/options.css"/>
     <!-- endbuild -->
+
 </head>
-<body ng-app="charttab" ng-controller="OptionsCtrl" class="options">
+<body ng-app="charttab" ng-controller="OptionsCtrl" class="options" ng-cloak>
 
-    <file id="file" ng-model="importFile" ng-change="importData()" accept="application/json"></file>
+<file id="file" ng-model="importFile" ng-change="importData()" accept="application/json"></file>
 
-    <md-list>
-        <md-list-item class="has-buttons">
-            <p>Backup/Restore:</p>
-            <md-button href="{{exportFile}}" download="charttab-backup_{{today}}.json">
-                <md-icon md-svg-src="images/file-download.svg"></md-icon>
-                Save
-            </md-button>
-            <md-button ng-click="openFile()">
-                <md-icon md-svg-src="images/file-upload.svg"></md-icon>
-                Load
-            </md-button>
-        </md-list-item>
-        <md-divider></md-divider>
-    </md-list>
+<md-list>
+    <md-list-item class="has-buttons">
+        <p>Backup/Restore:</p>
+        <md-button href="{{exportFile}}" download="charttab-backup_{{today}}.json">
+            <md-icon md-svg-src="images/file-download.svg"></md-icon>
+            Save
+        </md-button>
+        <md-button ng-click="openFile()">
+            <md-icon md-svg-src="images/file-upload.svg"></md-icon>
+            Load
+        </md-button>
+    </md-list-item>
+    <md-divider></md-divider>
+</md-list>
 
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
-    <script src="bower_components/angular-material/angular-material.js"></script>
-    <script src="bower_components/Chart.js/Chart.js"></script>
-    <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
-    <script src="bower_components/moment/moment.js"></script>
-    <script src="bower_components/angular-moment/angular-moment.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
+<!-- build:js scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+<script src="bower_components/Chart.js/Chart.js"></script>
+<script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/angular-moment/angular-moment.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
 
-    <!-- build:js scripts/options.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/config.js"></script>
-    <script src="scripts/controllers/options.js"></script>
-    <script src="scripts/directives/file.js"></script>
-    <script src="scripts/services/storage.js"></script>
-    <script src="scripts/services/uuid.js"></script>
-    <!-- endbuild -->
+<!-- build:js scripts/options.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/config.js"></script>
+<script src="scripts/controllers/options.js"></script>
+<script src="scripts/directives/file.js"></script>
+<script src="scripts/services/storage.js"></script>
+<script src="scripts/services/uuid.js"></script>
+<!-- endbuild -->
+
 </body>
 </html>

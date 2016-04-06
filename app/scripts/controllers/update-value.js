@@ -1,27 +1,25 @@
-'use strict';
+angular.module('charttab').controller('UpdateValueCtrl', function($scope, ui, moment, config, krs) {
+    'use strict';
 
-angular.module('charttab').controller('UpdateValueCtrl',
-    function ($scope, ui, moment, config, krs) {
+    // pre-fill previous value for a new week:
+    var nextMonday = moment().endOf('isoWeek');
+    if (moment(this.date, config.dateFormat).endOf('isoWeek').isSame(nextMonday) && this.result === 0) {
+        this.result = krs.getLastValue(this.chartData.results);
+    }
 
-        // pre-fill previous value for a new week:
-        var nextMonday = moment().endOf('isoWeek');
-        if (moment(this.date, config.dateFormat).endOf('isoWeek').isSame(nextMonday) && this.result === 0) {
-            this.result = krs.getLastValue(this.chartData.results);
-        }
+    $scope.data = {
+        date: this.date,
+        value: this.result
+    };
 
-        $scope.data = {
-            date: this.date,
-            value: this.result
-        };
+    $scope.chartData = this.chartData;
 
-        $scope.chartData = this.chartData;
+    $scope.dateFormat = config.dateFormat;
 
-        $scope.dateFormat = config.dateFormat;
+    $scope.update = function() {
+        krs.updateValue($scope.chartData.id, $scope.data.date, $scope.data.value).then(ui.hideDialog);
+    };
 
-        $scope.update = function () {
-            krs.updateValue($scope.chartData.id, $scope.data.date, $scope.data.value).then(ui.hideDialog);
-        };
+    $scope.cancel = ui.hideDialog;
 
-        $scope.cancel = ui.hideDialog;
-
-    });
+});

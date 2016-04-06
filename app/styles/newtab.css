@@ -20,47 +20,24 @@ body {
     color: #9aa2a6;
 }
 
-/* NAVBAR */
-
-.md-toolbar-tools > a.md-button.md-default-theme:not([disabled]):hover,
-.md-toolbar-tools > .md-button.md-default-theme:not([disabled]):hover {
-    background-color: rgba(255,255,255,0.1);
-}
-
-md-toolbar.md-default-theme .md-button {
-    color: #ffffff;
-}
-
-.md-toolbar-tools > a.md-button.md-default-theme:not([disabled]).md-focused,
-.md-toolbar-tools > .md-button.md-default-theme:not([disabled]).md-focused {
-    background-color: transparent;
-}
-
-md-toolbar.md-default-theme {
-    color: #fff;
-}
-
-
 /* FORMS */
 
 .input-description {
     display: inline-block;
-    margin: 26px 0 0 10px;
+    margin: 26px 15px 0 5px;
+    vertical-align: top;
 }
 
+md-input-container .md-placeholder {
+    top: -16px;
+}
 
 /* BUTTONS */
 
-.md-button.md-fab,
-.md-button.md-fab.md-fab-bottom-right {
-    position: fixed;
-}
-
 .md-button > md-icon {
     height: 24px;
-    margin: -4px 4px 0 0;
+    margin: -3px 4px 0 0;
 }
-
 
 /* DIALOGS */
 

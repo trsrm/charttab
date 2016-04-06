@@ -1,18 +1,16 @@
-'use strict';
+angular.module('charttab').controller('DeleteKrCtrl', function($scope, ui, krs) {
+    'use strict';
+    
+    $scope.title = this.kr.title;
 
-angular.module('charttab').controller('DeleteKrCtrl',
-    function ($scope, ui, krs) {
+    $scope.id = this.kr.id;
 
-        $scope.title = this.kr.title;
+    $scope.entity = 'chart';
 
-        $scope.id = this.kr.id;
+    $scope.remove = function() {
+        krs.remove($scope.id).then(ui.hideDialog);
+    };
 
-        $scope.entity = 'chart';
+    $scope.cancel = ui.hideDialog;
 
-        $scope.remove = function () {
-            krs.remove($scope.id).then(ui.hideDialog);
-        };
-
-        $scope.cancel = ui.hideDialog;
-
-    });
+});

@@ -1,29 +1,38 @@
-<md-dialog>
-    <md-toolbar>
-        <div class="md-toolbar-tools">Submit results</div>
-    </md-toolbar>
+<md-dialog ng-cloak>
     <form ng-submit="update()">
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Submit results</h2>
+            </div>
+        </md-toolbar>
+
         <md-dialog-content class="update-value" layout="row">
-            <md-input-container flex="25">
-                <label>Value</label>
-                <input type="number" ng-model="data.value" min="0" max="{{chartData.goal}}" autocomplete="off" required>
-            </md-input-container>
-            <span class="input-description" flex="35">{{chartData.units}}</span>
-            <md-input-container flex="40">
-                <label>Date</label>
-                <span class="md-placeholder">{{dateFormat}}</span>
-                <input type="text" autocomplete="off" maxlength="10" required
-                       pattern="20\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])"
-                       ng-model="data.date">
-            </md-input-container>
+            <div class="md-dialog-content">
+                <md-input-container flex="25">
+                    <label>Value</label>
+                    <input type="number" ng-model="data.value" min="0" max="{{chartData.goal}}" autocomplete="off"
+                           required>
+                </md-input-container>
+                <span class="input-description" flex="35">{{chartData.units}}</span>
+                <md-input-container flex="40">
+                    <label>Date</label>
+                    <span class="md-placeholder">{{dateFormat}}</span>
+                    <input type="text" autocomplete="off" maxlength="10" required
+                           pattern="20\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])"
+                           ng-model="data.date">
+                </md-input-container>
+            </div>
         </md-dialog-content>
-        <div class="md-actions">
+
+        <md-dialog-actions>
             <md-button class="md-primary" type="button" ng-click="cancel()">
                 Cancel
             </md-button>
             <md-button class="md-accent" type="submit">
                 Submit
             </md-button>
-        </div>
+        </md-dialog-actions>
+
     </form>
 </md-dialog>

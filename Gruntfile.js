@@ -6,7 +6,7 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
     // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
@@ -235,7 +235,7 @@ module.exports = function (grunt) {
         compress: {
             dist: {
                 options: {
-                    archive: function () {
+                    archive: function() {
                         var manifest = grunt.file.readJSON('app/manifest.json');
                         return 'package/charttab-' + manifest.version + '.zip';
                     }
@@ -260,7 +260,7 @@ module.exports = function (grunt) {
 
     });
 
-    grunt.registerTask('debug', function () {
+    grunt.registerTask('debug', function() {
         grunt.task.run([
             'clean:debug',
             'wiredep',

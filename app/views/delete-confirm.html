@@ -1,18 +1,26 @@
-<md-dialog>
-    <md-toolbar>
-        <div class="md-toolbar-tools">Delete {{entity}}</div>
-    </md-toolbar>
+<md-dialog ng-cloak>
     <form ng-submit="add()">
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Delete {{entity}}</h2>
+            </div>
+        </md-toolbar>
+
         <md-dialog-content class="delete-confirm" layout="row">
-            Do you really want to delete "{{title}}"?
+            <div class="md-dialog-content">
+                Do you really want to delete "{{title}}"?
+            </div>
         </md-dialog-content>
-        <div class="md-actions">
+
+        <md-dialog-actions>
             <md-button class="md-primary" ng-click="cancel()">
                 No
             </md-button>
             <md-button class="md-accent" ng-click="remove()">
                 Yes
             </md-button>
-        </div>
+        </md-dialog-actions>
+
     </form>
 </md-dialog>

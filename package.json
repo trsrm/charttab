@@ -2,7 +2,6 @@
   "name": "ChartTab",
   "version": "0.0.0",
   "description": "Motivational charts on the Chrome's new tab page.",
-  "repository": "https://github.com/",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
