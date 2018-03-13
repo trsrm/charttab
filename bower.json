@@ -1,15 +1,15 @@
 {
-  "name": "ChartTab",
+  "name": "charttab",
   "version": "0.0.0",
   "dependencies": {
-    "angular-material": "1.0.7",
-    "livereload": "2.2.1",
-    "angular-chart.js": "0.9.0",
-    "angular-moment": "0.10.3",
-    "angular": "1.4.x",
-    "angular-animate": "1.4.x",
-    "angular-aria": "1.4.x",
-    "angular-messages": "1.4.x"
+    "angular-material": "1.1.7",
+    "livereload": "2.3.0",
+    "angular-chart.js": "1.1.1",
+    "angular-moment": "1.2.0",
+    "angular": "1.5.11",
+    "angular-animate": "1.5.11",
+    "angular-aria": "1.5.11",
+    "angular-messages": "1.5.11"
   },
   "devDependencies": {}
 }

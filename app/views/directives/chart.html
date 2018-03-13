@@ -26,12 +26,14 @@
                 <h2 class="title">{{data.title}}</h2>
             </div>
         </div>
-        <canvas class="chart chart-line"
-                height="{{height}}"
+        <div ng-style="{height: height + 'px'}">
+            <canvas class="chart chart-line"
                 chart-data="data.data"
+                chart-dataset-override="data.override"
                 chart-labels="data.labels"
                 chart-options="data.options"
                 chart-click="chartClick">
-        </canvas>
+            </canvas>
+        </div>
     </md-card-content>
 </md-card>

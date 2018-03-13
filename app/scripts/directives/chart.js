@@ -1,6 +1,6 @@
-angular.module('charttab').directive('chart', function() {
+angular.module('charttab').directive('chart', function () {
     'use strict';
-    
+
     return {
         templateUrl: '/views/directives/chart.html',
         restrict: 'E',
@@ -8,9 +8,9 @@ angular.module('charttab').directive('chart', function() {
             data: '=',
             height: '='
         },
-        controller: function($scope, ui, moment, config) {
+        controller: function ($scope, ui, moment, config) {
 
-            var updateValueDialog = function(event, result, date) {
+            var updateValueDialog = function (event, result, date) {
                 ui.showDialog(event, '/views/update-value.html', {
                     controller: 'UpdateValueCtrl',
                     locals: {
@@ -21,21 +21,23 @@ angular.module('charttab').directive('chart', function() {
                 });
             };
 
-            $scope.chartClick = function(elements, event) {
+            $scope.chartClick = function (elements, event) {
                 if (!elements.length) {
                     return;
                 }
-                var point = elements[0];
-                var date = moment(point.label, config.dateFormat).subtract(1, 'days').format(config.dateFormat);
-                updateValueDialog(event, point.value, date);
+                var pointIndex = elements[0]._index;
+                var labels = $scope.data.labels;
+                var data = $scope.data.data[0];
+                var date = moment(labels[pointIndex], config.dateFormat).subtract(1, 'days').format(config.dateFormat);
+                updateValueDialog(event, data[pointIndex], date);
             };
 
-            $scope.updateValue = function(event) {
+            $scope.updateValue = function (event) {
                 var today = moment().format(config.dateFormat);
                 updateValueDialog(event, $scope.data.result, today);
             };
 
-            $scope.edit = function(event) {
+            $scope.edit = function (event) {
                 ui.showDialog(event, '/views/key-result-form.html', {
                     controller: 'KeyResultFormCtrl',
                     locals: {
@@ -44,7 +46,7 @@ angular.module('charttab').directive('chart', function() {
                 });
             };
 
-            $scope.remove = function(event) {
+            $scope.remove = function (event) {
                 ui.showDialog(event, '/views/delete-confirm.html', {
                     controller: 'DeleteKrCtrl',
                     locals: {

@@ -1,4 +1,4 @@
-angular.module('charttab').controller('NewTabCtrl', function($scope, ui, charts, bookmarks) {
+angular.module('charttab').controller('NewTabCtrl', function ($scope, ui, charts, bookmarks) {
     'use strict';
 
     $scope.pages = {
@@ -11,25 +11,25 @@ angular.module('charttab').controller('NewTabCtrl', function($scope, ui, charts,
     $scope.page = $scope.pages.charts;
 
     // listen to page change and mark it as not ready:
-    $scope.$watch('page', function() {
+    $scope.$watch('page', function () {
         $scope.ready = false;
     });
 
-    $scope.addKr = function(event) {
+    $scope.addKr = function (event) {
         ui.showDialog(event, '/views/key-result-form.html', {
             controller: 'KeyResultFormCtrl'
         });
     };
 
-    $scope.addBookmark = function(event) {
+    $scope.addBookmark = function (event) {
         ui.showDialog(event, '/views/bookmark-form.html', {
             controller: 'BookmarkFormCtrl'
         });
     };
 
-    var loadCharts = function() {
+    var loadCharts = function () {
         $scope.charts = {};
-        charts.getAll().then(function(chartsData) {
+        charts.getAll().then(function (chartsData) {
             $scope.charts = chartsData;
             $scope.chartHeight = charts.getBestHeight(chartsData.length);
             $scope.chartFlex = charts.getBestFlex(chartsData.length);
@@ -37,9 +37,9 @@ angular.module('charttab').controller('NewTabCtrl', function($scope, ui, charts,
         });
     };
 
-    var loadBookmarks = function() {
+    var loadBookmarks = function () {
         $scope.bookmarks = {};
-        bookmarks.getAll().then(function(bookmarksData) {
+        bookmarks.getAll().then(function (bookmarksData) {
             $scope.bookmarks = bookmarksData;
             $scope.bookmarkHeight = bookmarks.getBestHeight(bookmarksData.length);
             $scope.bookmarkFlex = bookmarks.getBestFlex(bookmarksData.length);
