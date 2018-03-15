@@ -1,18 +1,21 @@
-angular.module('charttab').service('krs', function($q, moment, config, uid) {
-    'use strict';
-    
+angular.module('charttab').service('krs', function ($q, moment, config, uid) {
+    /**
+     * @namespace krs
+     */
+    const krs = this;
+
     /**
      * Add new key result.
      * @param {object} data
-     * @return {Promise}
+     * @return {PromiseLike<any>}
      */
-    this.add = function(data) {
-        var deferred = $q.defer();
+    krs.add = function (data) {
+        let deferred = $q.defer();
 
         data.results = [];
 
-        var start = moment(data.start, config.dateFormat).add(1, 'weeks').startOf('isoWeek');
-        var end = moment(data.end, config.dateFormat).add(1, 'day');
+        let start = moment(data.start, config.dateFormat).add(1, 'weeks').startOf('isoWeek');
+        let end = moment(data.end, config.dateFormat).add(1, 'day');
         while (start.isBefore(end)) {
             data.results.push({
                 day: start.format(config.dateFormat),
@@ -21,7 +24,7 @@ angular.module('charttab').service('krs', function($q, moment, config, uid) {
             start.add(1, 'weeks');
         }
 
-        var item = {};
+        let item = {};
         item[uid()] = data;
         chrome.storage.sync.set(item, deferred.resolve);
 
@@ -30,12 +33,12 @@ angular.module('charttab').service('krs', function($q, moment, config, uid) {
 
     /**
      * Get all key results.
-     * @return {Promise}
+     * @return {PromiseLike<any>}
      */
-    this.getAll = function() {
-        var deferred = $q.defer();
+    krs.getAll = function () {
+        let deferred = $q.defer();
 
-        chrome.storage.sync.get(null, function(data) {
+        chrome.storage.sync.get(null, data => {
             deferred.resolve(data);
         });
 
@@ -44,12 +47,12 @@ angular.module('charttab').service('krs', function($q, moment, config, uid) {
 
     /**
      * Get key result by ID.
-     * @return {Promise}
+     * @return {PromiseLike<any>}
      */
-    this.getById = function(id) {
-        var deferred = $q.defer();
+    krs.getById = function (id) {
+        let deferred = $q.defer();
 
-        chrome.storage.sync.get(id, function(results) {
+        chrome.storage.sync.get(id, results => {
             if (!results[id]) {
                 deferred.reject();
             }
@@ -64,18 +67,18 @@ angular.module('charttab').service('krs', function($q, moment, config, uid) {
      * Update key result data.
      * @param {number} id
      * @param {object} data
-     * @return {Promise}
+     * @return {PromiseLike<any>}
      */
-    this.update = function(id, data) {
-        var deferred = $q.defer();
+    krs.update = function (id, data) {
+        let deferred = $q.defer();
 
-        this.getById(id).then(function(kr) {
+        krs.getById(id).then(kr => {
 
             kr.title = data.title;
             kr.goal = data.goal;
             kr.units = data.units;
 
-            var item = {};
+            let item = {};
             item[id] = kr;
             chrome.storage.sync.set(item, deferred.resolve);
         });
@@ -86,10 +89,10 @@ angular.module('charttab').service('krs', function($q, moment, config, uid) {
     /**
      * Delete key result.
      * @param {number} id
-     * @return {Promise}
+     * @return {PromiseLike<any>}
      */
-    this.remove = function(id) {
-        var deferred = $q.defer();
+    krs.remove = function (id) {
+        let deferred = $q.defer();
 
         chrome.storage.sync.remove(id, deferred.resolve);
 
@@ -101,22 +104,22 @@ angular.module('charttab').service('krs', function($q, moment, config, uid) {
      * @param {number} id
      * @param {string} date
      * @param {number} value
-     * @return {Promise}
+     * @return {PromiseLike<any>}
      */
-    this.updateValue = function(id, date, value) {
-        var deferred = $q.defer();
+    krs.updateValue = function (id, date, value) {
+        let deferred = $q.defer();
 
-        this.getById(id).then(function(kr) {
-            var day = moment(date, config.dateFormat).add(1, 'weeks').startOf('isoWeek').format(config.dateFormat);
+        krs.getById(id).then(kr => {
+            let day = moment(date, config.dateFormat).add(1, 'weeks').startOf('isoWeek').format(config.dateFormat);
 
-            for (var i = 0; i < kr.results.length; i++) {
+            for (let i = 0; i < kr.results.length; i++) {
                 if (kr.results[i].day === day) {
                     kr.results[i].value = value;
                     break;
                 }
             }
 
-            var item = {};
+            let item = {};
             item[id] = kr;
             chrome.storage.sync.set(item, deferred.resolve);
         });
@@ -129,8 +132,8 @@ angular.module('charttab').service('krs', function($q, moment, config, uid) {
      * @param {array} results
      * @return {number}
      */
-    this.getLastValue = function(results) {
-        for (var i = 0; i < results.length; i++) {
+    krs.getLastValue = function (results) {
+        for (let i = 0; i < results.length; i++) {
             if (results[i].day === moment().startOf('isoWeek').format(config.dateFormat)) {
                 return results[i].value;
             }
@@ -140,13 +143,13 @@ angular.module('charttab').service('krs', function($q, moment, config, uid) {
 
     /**
      * Get common dates for KRs.
-     * @return {*}
+     * @return {PromiseLike<any>}
      */
-    this.getDates = function() {
-        var deferred = $q.defer();
+    krs.getDates = function () {
+        let deferred = $q.defer();
 
-        this.getAll().then(function(krs) {
-            for (var key in krs) {
+        krs.getAll().then(krs => {
+            for (let key in krs) {
                 if (krs.hasOwnProperty(key)) {
                     deferred.resolve({start: krs[key].start, end: krs[key].end});
                 }

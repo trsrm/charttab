@@ -1,49 +1,29 @@
 angular.module('charttab').controller('NewTabCtrl', function ($scope, ui, charts, bookmarks) {
-    'use strict';
+    let vm = this;
 
-    $scope.pages = {
+    vm.pages = {
         charts: 1,
         bookmarks: 2,
         apps: 3
     };
 
     // set default page:
-    $scope.page = $scope.pages.charts;
+    vm.page = vm.pages.charts;
 
     // listen to page change and mark it as not ready:
     $scope.$watch('page', function () {
-        $scope.ready = false;
+        vm.ready = false;
     });
 
-    $scope.addKr = function (event) {
+    vm.addKr = function (event) {
         ui.showDialog(event, '/views/key-result-form.html', {
             controller: 'KeyResultFormCtrl'
         });
     };
 
-    $scope.addBookmark = function (event) {
+    vm.addBookmark = function (event) {
         ui.showDialog(event, '/views/bookmark-form.html', {
             controller: 'BookmarkFormCtrl'
-        });
-    };
-
-    var loadCharts = function () {
-        $scope.charts = {};
-        charts.getAll().then(function (chartsData) {
-            $scope.charts = chartsData;
-            $scope.chartHeight = charts.getBestHeight(chartsData.length);
-            $scope.chartFlex = charts.getBestFlex(chartsData.length);
-            $scope.ready = true;
-        });
-    };
-
-    var loadBookmarks = function () {
-        $scope.bookmarks = {};
-        bookmarks.getAll().then(function (bookmarksData) {
-            $scope.bookmarks = bookmarksData;
-            $scope.bookmarkHeight = bookmarks.getBestHeight(bookmarksData.length);
-            $scope.bookmarkFlex = bookmarks.getBestFlex(bookmarksData.length);
-            $scope.ready = true;
         });
     };
 
@@ -58,7 +38,28 @@ angular.module('charttab').controller('NewTabCtrl', function ($scope, ui, charts
     chrome.bookmarks.onChildrenReordered.addListener(loadBookmarks);
 
     loadCharts();
-
     loadBookmarks();
+
+    // --------------------------------------------------------------------------------------------
+
+    function loadCharts() {
+        vm.charts = {};
+        charts.getAll().then(chartsData => {
+            vm.charts = chartsData;
+            vm.chartHeight = charts.getBestHeight(chartsData.length);
+            vm.chartFlex = charts.getBestFlex(chartsData.length);
+            vm.ready = true;
+        });
+    }
+
+    function loadBookmarks() {
+        vm.bookmarks = {};
+        bookmarks.getAll().then(bookmarksData => {
+            vm.bookmarks = bookmarksData;
+            vm.bookmarkHeight = bookmarks.getBestHeight(bookmarksData.length);
+            vm.bookmarkFlex = bookmarks.getBestFlex(bookmarksData.length);
+            vm.ready = true;
+        });
+    }
 
 });

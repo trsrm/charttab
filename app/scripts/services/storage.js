@@ -1,24 +1,36 @@
-angular.module('charttab').service('storage', function($q) {
-    'use strict';
+angular.module('charttab').service('storage', function ($q, $window, moment, config) {
+    /**
+     * @namespace storage
+     */
+    const storage = this;
 
-    var dataFile = null;
+    /**
+     * @type {string|null}
+     */
+    let dataFile = null;
 
     /**
      * Export key results data to file object.
-     * @return {Promise}
+     * @return {PromiseLike<any>}
      */
-    this.exportData = function() {
-        var deferred = $q.defer();
+    storage.exportData = function () {
+        let deferred = $q.defer();
 
-        chrome.storage.sync.get(null, function(data) {
-            var string = JSON.stringify(data);
-            var blob = new Blob([string], {type: 'application/json'});
+        chrome.storage.sync.get(null, data => {
+            let string = JSON.stringify(data);
+            let blob = new Blob([string], {type: 'application/json'});
+            let today = moment().format(config.dateFormat);
 
             if (dataFile !== null) {
-                window.URL.revokeObjectURL(dataFile);
+                $window.URL.revokeObjectURL(dataFile);
             }
+            dataFile = $window.URL.createObjectURL(blob);
 
-            dataFile = window.URL.createObjectURL(blob);
+
+            chrome.downloads.download({
+                url: dataFile,
+                filename: `charttab-backup_${today}.json`
+            });
 
             deferred.resolve(dataFile);
         });
@@ -29,21 +41,21 @@ angular.module('charttab').service('storage', function($q) {
     /**
      * Import data from file.
      * @param {File} file
-     * @return {Promise}
+     * @return {PromiseLike<any>}
      */
-    this.importData = function(file) {
-        var deferred = $q.defer();
+    storage.importData = function (file) {
+        let deferred = $q.defer();
 
         if (file.type !== 'application/json') {
             deferred.reject();
         }
 
-        var fileReader = new FileReader();
-        fileReader.addEventListener('load', function(event) {
+        let fileReader = new FileReader();
+        fileReader.addEventListener('load', event => {
             try {
-                var data = JSON.parse(event.target.result);
+                let data = JSON.parse(event.target.result);
 
-                chrome.storage.sync.clear(function() {
+                chrome.storage.sync.clear(() => {
                     chrome.storage.sync.set(data, deferred.resolve);
                 });
             } catch (error) {

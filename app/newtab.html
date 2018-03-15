@@ -18,61 +18,61 @@
     <!-- endbuild -->
 
 </head>
-<body ng-app="charttab" ng-controller="NewTabCtrl" layout="column" ng-cloak>
+<body ng-app="charttab" ng-controller="NewTabCtrl as vm" layout="column" ng-cloak>
 
 <md-toolbar>
     <div class="md-toolbar-tools">
-        <md-button ng-click="page = pages.charts">
+        <md-button ng-click="vm.page = vm.pages.charts">
             <md-icon md-svg-src="images/charts.svg"></md-icon>
             Charts
         </md-button>
-        <md-button ng-click="page = pages.bookmarks">
+        <md-button ng-click="vm.page = vm.pages.bookmarks">
             <md-icon md-svg-src="images/bookmark.svg"></md-icon>
             Bookmarks
         </md-button>
-        <md-button ng-click="page = pages.apps">
+        <md-button ng-click="vm.page = vm.pages.apps">
             <md-icon md-svg-src="images/apps.svg"></md-icon>
             Apps
         </md-button>
         <span flex></span>
-        <md-button ng-click="addKr($event)" ng-if="page === pages.charts">
+        <md-button ng-click="vm.addKr($event)" ng-if="vm.page === vm.pages.charts">
             <md-icon md-svg-src="images/add.svg"></md-icon>
             Add chart
         </md-button>
-        <md-button ng-click="addBookmark($event)" ng-if="page === pages.bookmarks">
+        <md-button ng-click="vm.addBookmark($event)" ng-if="vm.page === vm.pages.bookmarks">
             <md-icon md-svg-src="images/add.svg"></md-icon>
             Add bookmark
         </md-button>
     </div>
 </md-toolbar>
 
-<md-content ng-if="page === pages.charts" flex>
+<md-content ng-if="vm.page === vm.pages.charts" flex>
     <div layout="row" layout-wrap>
-        <div flex="{{chartFlex}}" ng-repeat="chart in charts track by chart.id">
-            <chart data="chart" height="chartHeight"></chart>
+        <div flex="{{vm.chartFlex}}" ng-repeat="chart in vm.charts track by chart.id">
+            <chart data="chart" height="vm.chartHeight"></chart>
         </div>
     </div>
-    <div class="page-description" layout="column" layout-align="center center" ng-if="!charts.length && ready">
+    <div class="page-description" layout="column" layout-align="center center" ng-if="!vm.charts.length && vm.ready">
         <h1 class="md-display-1">NO CHARTS YET</h1>
 
         <h2 class="md-headline">Add a new one by pressing the "ADD CHART" button on the top.</h2>
     </div>
 </md-content>
 
-<md-content ng-if="page === pages.bookmarks" flex>
+<md-content ng-if="vm.page === vm.pages.bookmarks" flex>
     <div layout="row" layout-wrap>
-        <div flex="{{bookmarkFlex}}" ng-repeat="bookmark in bookmarks track by bookmark.id">
-            <bookmark data="bookmark" height="bookmarkHeight"></bookmark>
+        <div flex="{{vm.bookmarkFlex}}" ng-repeat="bookmark in vm.bookmarks track by bookmark.id">
+            <bookmark data="bookmark" height="vm.bookmarkHeight"></bookmark>
         </div>
     </div>
-    <div class="page-description" layout="column" layout-align="center center" ng-if="!bookmarks.length && ready">
+    <div class="page-description" layout="column" layout-align="center center" ng-if="!vm.bookmarks.length && vm.ready">
         <h1 class="md-display-1">NO BOOKMARKS YET</h1>
 
         <h2 class="md-headline">Add a new one by pressing the "ADD BOOKMARK" button on the top.</h2>
     </div>
 </md-content>
 
-<md-content ng-if="page === pages.apps" flex>
+<md-content ng-if="vm.page === vm.pages.apps" flex>
     <div class="page-description" layout="column" layout-align="center center">
         <h1 class="md-display-1">APPS ARE COMING SOON</h1>
 
@@ -95,21 +95,21 @@
 <!-- endbuild -->
 
 <!-- build:js scripts/newtab.js -->
-<script src="scripts/app.js"></script>
+<script src="scripts/charttab.js"></script>
 <script src="scripts/config.js"></script>
-<script src="scripts/controllers/newtab.js"></script>
-<script src="scripts/controllers/key-result-form.js"></script>
-<script src="scripts/controllers/bookmark-form.js"></script>
-<script src="scripts/controllers/update-value.js"></script>
-<script src="scripts/controllers/delete-bookmark.js"></script>
-<script src="scripts/controllers/delete-kr.js"></script>
+<script src="scripts/controllers/NewTabCtrl.js"></script>
+<script src="scripts/controllers/KeyResultFormCtrl.js"></script>
+<script src="scripts/controllers/BookmarkFormCtrl.js"></script>
+<script src="scripts/controllers/UpdateValueCtrl.js"></script>
+<script src="scripts/controllers/DeleteBookmarkCtrl.js"></script>
+<script src="scripts/controllers/DeleteKrCtrl.js"></script>
 <script src="scripts/directives/bookmark.js"></script>
 <script src="scripts/directives/chart.js"></script>
 <script src="scripts/services/krs.js"></script>
 <script src="scripts/services/bookmarks.js"></script>
 <script src="scripts/services/charts.js"></script>
 <script src="scripts/services/ui.js"></script>
-<script src="scripts/services/uuid.js"></script>
+<script src="scripts/services/uid.js"></script>
 <!-- endbuild -->
 
 <!-- build:dev -->

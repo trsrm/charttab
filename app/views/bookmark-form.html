@@ -1,9 +1,9 @@
-<md-dialog ng-cloak>
-    <form ng-submit="submit()">
+<md-dialog>
+    <form ng-submit="vm.submit()">
 
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>{{isEdit ? 'Edit bookmark' : 'Add new bookmark'}}</h2>
+                <h2>{{vm.isEdit ? 'Edit bookmark' : 'Add new bookmark'}}</h2>
             </div>
         </md-toolbar>
 
@@ -12,24 +12,24 @@
                 <div layout="row">
                     <md-input-container flex="100">
                         <label>Title</label>
-                        <input type="text" ng-model="bookmark.title" autocomplete="off" maxlength="32" required>
+                        <input type="text" ng-model="vm.bookmark.title" autocomplete="off" maxlength="32" required>
                     </md-input-container>
                 </div>
                 <div layout="row">
                     <md-input-container flex="100">
                         <label>URL</label>
-                        <input type="url" ng-model="bookmark.url" autocomplete="off" required>
+                        <input type="url" ng-model="vm.bookmark.url" autocomplete="off" required>
                     </md-input-container>
                 </div>
             </div>
         </md-dialog-content>
 
         <md-dialog-actions>
-            <md-button class="md-primary" type="button" ng-click="cancel()">
+            <md-button class="md-primary" type="button" ng-click="vm.cancel()">
                 Cancel
             </md-button>
             <md-button class="md-accent" type="submit">
-                {{isEdit ? 'Save' : 'Add'}}
+                {{vm.isEdit ? 'Save' : 'Add'}}
             </md-button>
         </md-dialog-actions>
 

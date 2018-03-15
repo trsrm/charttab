@@ -1,6 +1,4 @@
-angular.module('charttab').directive('bookmark', function() {
-    'use strict';
-    
+angular.module('charttab').directive('bookmark', function ($document) {
     return {
         templateUrl: '/views/directives/bookmark.html',
         restrict: 'E',
@@ -8,18 +6,18 @@ angular.module('charttab').directive('bookmark', function() {
             data: '=',
             height: '='
         },
-        controller: function($scope, config, ui) {
+        controller: function ($scope, config, ui) {
 
             $scope.thumbnailStyle = {
                 'background-image': 'url(' + config.thumbnailsURL.replace('{{url}}', $scope.data.url) + ')',
                 'height': $scope.height + 'px'
             };
 
-            var tmp = document.createElement('a');
+            let tmp = $document[0].createElement('a');
             tmp.href = $scope.data.url;
             $scope.host = tmp.hostname;
 
-            $scope.edit = function(event) {
+            $scope.edit = function (event) {
                 ui.showDialog(event, '/views/bookmark-form.html', {
                     controller: 'BookmarkFormCtrl',
                     locals: {
@@ -28,7 +26,7 @@ angular.module('charttab').directive('bookmark', function() {
                 });
             };
 
-            $scope.remove = function(event) {
+            $scope.remove = function (event) {
                 ui.showDialog(event, '/views/delete-confirm.html', {
                     controller: 'DeleteBookmarkCtrl',
                     locals: {

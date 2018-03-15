@@ -1,16 +1,19 @@
-angular.module('charttab').service('ui', function($mdDialog) {
-    'use strict';
-    
+angular.module('charttab').service('ui', function ($mdDialog) {
+    /**
+     * @namespace ui
+     */
+    const ui = this;
+
     /**
      * Show modal dialog
      * @param {Event} event
      * @param {string} url
      * @param {object} options
      */
-    this.showDialog = function(event, url, options) {
+    ui.showDialog = function (event, url, options) {
         options = angular.extend({
             templateUrl: url,
-            controller: 'UpdateValueCtrl',
+            controllerAs: 'vm',
             targetEvent: event,
             focusOnOpen: false,
             bindToController: true
@@ -21,6 +24,6 @@ angular.module('charttab').service('ui', function($mdDialog) {
     /**
      * Hide modal dialog
      */
-    this.hideDialog = $mdDialog.hide;
+    ui.hideDialog = $mdDialog.hide;
 
 });

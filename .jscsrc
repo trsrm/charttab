@@ -1,8 +1,0 @@
-{
-    "preset": "google",
-    "maxErrors": 999,
-    "validateIndentation": 4,
-    "maximumLineLength": 120,
-    "requireDotNotation": null,
-    "jsDoc": null
-}

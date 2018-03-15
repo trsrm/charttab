@@ -1,6 +1,4 @@
 angular.module('charttab').directive('chart', function () {
-    'use strict';
-
     return {
         templateUrl: '/views/directives/chart.html',
         restrict: 'E',
@@ -10,7 +8,7 @@ angular.module('charttab').directive('chart', function () {
         },
         controller: function ($scope, ui, moment, config) {
 
-            var updateValueDialog = function (event, result, date) {
+            let updateValueDialog = function (event, result, date) {
                 ui.showDialog(event, '/views/update-value.html', {
                     controller: 'UpdateValueCtrl',
                     locals: {
@@ -25,15 +23,15 @@ angular.module('charttab').directive('chart', function () {
                 if (!elements.length) {
                     return;
                 }
-                var pointIndex = elements[0]._index;
-                var labels = $scope.data.labels;
-                var data = $scope.data.data[0];
-                var date = moment(labels[pointIndex], config.dateFormat).subtract(1, 'days').format(config.dateFormat);
+                let pointIndex = elements[0]._index;
+                let labels = $scope.data.labels;
+                let data = $scope.data.data[0];
+                let date = moment(labels[pointIndex], config.dateFormat).subtract(1, 'days').format(config.dateFormat);
                 updateValueDialog(event, data[pointIndex], date);
             };
 
             $scope.updateValue = function (event) {
-                var today = moment().format(config.dateFormat);
+                let today = moment().format(config.dateFormat);
                 updateValueDialog(event, $scope.data.result, today);
             };
 

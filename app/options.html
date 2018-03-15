@@ -15,18 +15,18 @@
     <!-- endbuild -->
 
 </head>
-<body ng-app="charttab" ng-controller="OptionsCtrl" class="options" ng-cloak>
+<body ng-app="charttab" ng-controller="OptionsCtrl as vm" class="options" ng-cloak>
 
-<file id="file" ng-model="importFile" ng-change="importData()" accept="application/json"></file>
+<file id="file" ng-model="vm.importFile" ng-change="vm.importData()" accept="application/json"></file>
 
 <md-list>
     <md-list-item class="has-buttons">
         <p>Backup/Restore:</p>
-        <md-button href="{{exportFile}}" download="charttab-backup_{{today}}.json">
+        <md-button ng-click="vm.exportData()">
             <md-icon md-svg-src="images/file-download.svg"></md-icon>
             Save
         </md-button>
-        <md-button ng-click="openFile()">
+        <md-button ng-click="vm.openFile()">
             <md-icon md-svg-src="images/file-upload.svg"></md-icon>
             Load
         </md-button>
@@ -49,12 +49,12 @@
 <!-- endbuild -->
 
 <!-- build:js scripts/options.js -->
-<script src="scripts/app.js"></script>
+<script src="scripts/charttab.js"></script>
 <script src="scripts/config.js"></script>
-<script src="scripts/controllers/options.js"></script>
+<script src="scripts/controllers/OptionsCtrl.js"></script>
 <script src="scripts/directives/file.js"></script>
 <script src="scripts/services/storage.js"></script>
-<script src="scripts/services/uuid.js"></script>
+<script src="scripts/services/uid.js"></script>
 <!-- endbuild -->
 
 </body>

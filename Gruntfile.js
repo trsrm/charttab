@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function (grunt) {
 
     // Load grunt tasks automatically
@@ -65,18 +63,6 @@ module.exports = function (grunt) {
                     ]
                 }]
             }
-        },
-
-        // Make sure code styles are up to par and there are no obvious mistakes
-        jshint: {
-            options: {
-                jshintrc: true,
-                reporter: require('jshint-stylish')
-            },
-            all: [
-                'Gruntfile.js',
-                'app/scripts/{,*/}*.js'
-            ]
         },
 
         // Automatically inject Bower components into the app
@@ -261,7 +247,6 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('default', [
-        'jshint',
         'build'
     ]);
 };

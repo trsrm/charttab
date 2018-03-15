@@ -1,18 +1,21 @@
-angular.module('charttab').service('bookmarks', function($q, $window) {
-    'use strict';
+angular.module('charttab').service('bookmarks', function ($q, $window) {
+    /**
+     * @namespace bookmarks
+     */
+    const bookmarks = this;
 
     /**
      * Get bookmarks root node.
-     * @return {Promise}
+     * @return {PromiseLike<any>}
      */
-    this.getFolder = function() {
-        var deferred = $q.defer();
+    bookmarks.getFolder = function () {
+        let deferred = $q.defer();
 
-        chrome.bookmarks.search({title: 'ChartTab'}, function(results) {
+        chrome.bookmarks.search({title: 'ChartTab'}, results => {
             if (results && results[0] && results[0].parentId === '2') {
                 deferred.resolve(results[0]);
             } else {
-                chrome.bookmarks.create({title: 'ChartTab'}, function(node) {
+                chrome.bookmarks.create({title: 'ChartTab'}, node => {
                     deferred.resolve(node);
                 });
             }
@@ -24,12 +27,12 @@ angular.module('charttab').service('bookmarks', function($q, $window) {
     /**
      * Add new bookmark.
      * @param {object} data
-     * @return {Promise}
+     * @return {PromiseLike<any>}
      */
-    this.add = function(data) {
-        var deferred = $q.defer();
+    bookmarks.add = function (data) {
+        let deferred = $q.defer();
 
-        this.getFolder().then(function(folder) {
+        bookmarks.getFolder().then(folder => {
             data.parentId = folder.id;
             chrome.bookmarks.create(data, deferred.resolve);
         });
@@ -39,13 +42,13 @@ angular.module('charttab').service('bookmarks', function($q, $window) {
 
     /**
      * Get all bookmarks.
-     * @return {Promise}
+     * @return {PromiseLike<any>}
      */
-    this.getAll = function() {
-        var deferred = $q.defer();
+    bookmarks.getAll = function () {
+        let deferred = $q.defer();
 
-        this.getFolder().then(function(folder) {
-            chrome.bookmarks.getSubTree(folder.id, function(subTree) {
+        bookmarks.getFolder().then(folder => {
+            chrome.bookmarks.getSubTree(folder.id, subTree => {
                 deferred.resolve(subTree[0].children);
             });
         });
@@ -57,10 +60,10 @@ angular.module('charttab').service('bookmarks', function($q, $window) {
      * Update bookmark.
      * @param {number} id
      * @param {object} data
-     * @return {Promise}
+     * @return {PromiseLike<any>}
      */
-    this.update = function(id, data) {
-        var deferred = $q.defer();
+    bookmarks.update = function (id, data) {
+        let deferred = $q.defer();
 
         chrome.bookmarks.update(id, {
             title: data.title,
@@ -73,10 +76,10 @@ angular.module('charttab').service('bookmarks', function($q, $window) {
     /**
      * Delete bookmark.
      * @param {number} id
-     * @return {Promise}
+     * @return {PromiseLike<any>}
      */
-    this.remove = function(id) {
-        var deferred = $q.defer();
+    bookmarks.remove = function (id) {
+        let deferred = $q.defer();
 
         chrome.bookmarks.remove(id, deferred.resolve);
 
@@ -88,12 +91,12 @@ angular.module('charttab').service('bookmarks', function($q, $window) {
      * @param {number} bookmarksNumber
      * @return {number}
      */
-    this.getBestHeight = function(bookmarksNumber) {
-        var window = $window.innerHeight;
-        var navbar = 64;
-        var heading = 48;
-        var spacings = 28;
-        var rowsNumber;
+    bookmarks.getBestHeight = function (bookmarksNumber) {
+        let window = $window.innerHeight;
+        let navbar = 64;
+        let heading = 48;
+        let spacings = 28;
+        let rowsNumber;
         if (bookmarksNumber < 7) {
             rowsNumber = 2;
         } else if (bookmarksNumber < 13) {
@@ -109,7 +112,7 @@ angular.module('charttab').service('bookmarks', function($q, $window) {
      * @param {number} bookmarksNumber
      * @return {number}
      */
-    this.getBestFlex = function(bookmarksNumber) {
+    bookmarks.getBestFlex = function (bookmarksNumber) {
         if (bookmarksNumber < 7) {
             return 33;
         } else if (bookmarksNumber < 13) {

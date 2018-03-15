@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('charttab',
     [
         'ngMaterial',
@@ -7,11 +5,11 @@ angular.module('charttab',
         'angularMoment'
     ])
 
-    .config(function($compileProvider) {
+    .config(function ($compileProvider) {
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|chrome-extension|blob):/);
     })
 
-    .config(function($mdThemingProvider) {
+    .config(function ($mdThemingProvider) {
         $mdThemingProvider.definePalette('primary', {
             '50': 'dfeaf0',
             '100': 'cbdde6',

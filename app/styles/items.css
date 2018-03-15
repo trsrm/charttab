@@ -24,15 +24,16 @@
     right: 0;
     height: 42px;
     transition: 0.2s;
-    transition-delay: 0.4s;
+    transition-delay: 0.1s;
 }
 
 .item-card .actions {
     top: -42px;
 }
 
-.item-card:hover .actions {
+.item-card .header:hover .actions {
     top: 0;
+    transition-delay: 0.2s;
 }
 
 .item-card .details {
@@ -40,8 +41,9 @@
     top: 0;
 }
 
-.item-card:hover .details {
+.item-card .header:hover .details {
     top: 42px;
+    transition-delay: 0.2s;
 }
 
 .item-card .title {
