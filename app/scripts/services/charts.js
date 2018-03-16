@@ -15,40 +15,7 @@ angular.module('charttab').service('charts', function ($q, $window, moment, krs,
             let charts = [];
 
             angular.forEach(krsData, (kr, id) => {
-                let chart = angular.extend({
-                    id: id,
-                    labels: [],
-                    data: [[], [], []],
-                    override: angular.copy(overrideOptions),
-                    options: angular.copy(defaultOptions)
-                }, kr);
-                chart.options.scales.yAxes[0].ticks = {max: kr.goal};
-
-                let guideStep = kr.goal / kr.results.length;
-                let predictionStep;
-                kr.results.forEach((result, index) => {
-                    chart.labels.push(result.day);
-                    let resultDay = moment(result.day, config.dateFormat);
-                    let nextTuesday = moment().add(1, 'weeks').startOf('isoWeek').add(1, 'days');
-                    if (resultDay.isBefore(nextTuesday)) {
-                        chart.data[0].push(result.value);
-                        chart.result = result.value;
-                        chart.data[2].push(undefined);
-                    } else {
-                        if (typeof predictionStep === 'undefined') {
-                            let lastValue = kr.results[index - 1].value;
-                            chart.data[2][index - 1] = lastValue;
-                            predictionStep = (lastValue - kr.results[0].value) / (index - 1);
-                            predictionStep = Math.max(predictionStep, 0);
-                        }
-                        chart.data[2].push(chart.data[2][index - 1] + predictionStep);
-                    }
-                    chart.data[1].push(guideStep * index);
-                });
-
-                chart.progress = Math.round(chart.result / chart.goal * 100) + '%';
-                // chart.data.push(angular.copy(chart.data[2]));
-
+                let chart = makeChart(kr, id);
                 charts.push(chart);
             });
 
@@ -108,6 +75,75 @@ angular.module('charttab').service('charts', function ($q, $window, moment, krs,
 
     // --------------------------------------------------------------------------------------------
 
+    /**
+     * Prepare a data for a chart
+     * @param {object} kr
+     * @param {string} id
+     * @return {object}
+     */
+    function makeChart(kr, id) {
+        let chart = angular.extend({
+            id: id,
+            labels: [],
+            data: [[], [], []],
+            override: angular.copy(overrideOptions),
+            options: angular.copy(defaultOptions)
+        }, kr);
+        chart.options.scales.yAxes[0].ticks = {max: kr.goal};
+
+        let guideStep = kr.goal / kr.results.length;
+        let predictionStep;
+        kr.results.forEach((result, index) => {
+            chart.labels.push(result.day);
+
+            let resultDay = moment(result.day, config.dateFormat);
+            let nextTuesday = moment().add(1, 'weeks').startOf('isoWeek').add(1, 'days');
+            if (resultDay.isBefore(nextTuesday)) {
+                // draw the results line:
+                chart.data[0].push(result.value);
+                chart.result = result.value;
+                chart.data[2].push(undefined);
+
+            } else {
+                if (typeof predictionStep === 'undefined') {
+                    // initialize the prediction line:
+                    let lastValue = kr.results[index - 1].value;
+                    chart.data[2][index - 1] = lastValue;
+                    predictionStep = (lastValue - kr.results[0].value) / (index - 1);
+                    predictionStep = Math.max(predictionStep, 0);
+                }
+
+                // draw the prediction line:
+                let predictedValue = chart.data[2][index - 1] + predictionStep;
+                chart.data[2].push(predictedValue);
+            }
+
+            // draw the guide line:
+            chart.data[1].push(guideStep * index);
+        });
+
+        // change the guide line color to indicate predicted progress:
+        let predictedResult = chart.data[2][chart.data[2].length - 1];
+        let progressColor = RED;
+        if (predictedResult / kr.goal > 0.75) {
+            progressColor = GREEN;
+        } else if (predictedResult / kr.goal > 0.5) {
+            progressColor = YELLOW;
+        }
+        chart.override[1].borderColor = progressColor;
+
+        // calculate the overall progress:
+        chart.progress = Math.round(chart.result / chart.goal * 100) + '%';
+
+        return chart;
+    }
+
+    // guide line colors to predicted progress:
+    const RED = '#FF8A65';
+    const YELLOW = '#ffc107';
+    const GREEN = '#8BC34A';
+
+    // default chat options:
     const defaultOptions = {
         maintainAspectRatio: false,
         animation: false,
@@ -143,6 +179,7 @@ angular.module('charttab').service('charts', function ($q, $window, moment, krs,
         }
     };
 
+    // default lines styles:
     const overrideOptions = [{
         label: 'Progress'
     }, {
@@ -151,10 +188,13 @@ angular.module('charttab').service('charts', function ($q, $window, moment, krs,
         pointRadius: 0,
         pointHitRadius: 0,
         pointHoverRadius: 0,
+        borderDash: [1, 2],
+        borderCapStyle: 'round',
+        cubicInterpolationMode: 'monotone',
         fill: false
     }, {
         label: 'Prediction',
-        borderColor: '#FFCCBC',
+        borderColor: '#DCDCDC',
         borderWidth: 1,
         pointRadius: 0,
         pointHitRadius: 0,
