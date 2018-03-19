@@ -1,5 +1,9 @@
 /* CHARTS */
 
+.item-card .chart-container {
+    margin-top: 15px;
+}
+
 .item-card .result {
     margin: 1px 0 0 5px;
     float: right;

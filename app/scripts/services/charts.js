@@ -44,7 +44,7 @@ angular.module('charttab').service('charts', function ($q, $window, moment, krs,
         let window = $window.innerHeight;
         let navbar = 64;
         let heading = 48;
-        let spacings = 26;
+        let spacings = 33;
         let rowsNumber;
         if (chartsNumber < 7) {
             rowsNumber = 2;
@@ -91,7 +91,7 @@ angular.module('charttab').service('charts', function ($q, $window, moment, krs,
         }, kr);
         chart.options.scales.yAxes[0].ticks = {max: kr.goal};
 
-        let guideStep = kr.goal / kr.results.length;
+        let guideStep = kr.goal / (kr.results.length - 1);
         let predictionStep;
         kr.results.forEach((result, index) => {
             chart.labels.push(result.day);
