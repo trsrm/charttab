@@ -14,6 +14,10 @@ angular.module('charttab').controller('UpdateValueCtrl', function(ui, moment, co
 
     vm.dateFormat = config.dateFormat;
 
+    vm.minDate = moment(vm.chartData.start, config.dateFormat).toDate();
+
+    vm.maxDate = moment(vm.chartData.end, config.dateFormat).toDate();
+
     vm.update = function() {
         krs.updateValue(vm.chartData.id, vm.data.date, vm.data.value).then(ui.hideDialog);
     };

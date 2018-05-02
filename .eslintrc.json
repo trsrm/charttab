@@ -5,7 +5,8 @@
   },
   "globals": {
     "angular": false,
-    "chrome": false
+    "chrome": false,
+    "moment": false
   },
   "extends": [
     "eslint:recommended",

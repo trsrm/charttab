@@ -11,16 +11,24 @@
             <div class="md-dialog-content">
                 <md-input-container flex="25">
                     <label>Value</label>
-                    <input type="number" ng-model="vm.data.value" min="0" max="{{vm.chartData.goal}}" autocomplete="off"
-                           required>
+                    <input type="number"
+                        ng-model="vm.data.value"
+                        min="0"
+                        max="{{vm.chartData.goal}}"
+                        autocomplete="off"
+                        autofocus
+                        title="Last updated: {{vm.chartData.lastUpdated}}"
+                        required>
                 </md-input-container>
                 <span class="input-description" flex="35">{{vm.chartData.units}}</span>
                 <md-input-container flex="40">
                     <label>Date</label>
                     <span class="md-placeholder">{{vm.dateFormat}}</span>
-                    <input type="text" autocomplete="off" maxlength="10" required
-                           pattern="20\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])"
-                           ng-model="vm.data.date">
+                    <md-datepicker ng-model="vm.data.date"
+                        ng-required="true"
+                        md-min-date="vm.minDate"
+                        md-max-date="vm.maxDate"
+                        md-hide-icons="calendar"></md-datepicker>
                 </md-input-container>
             </div>
         </md-dialog-content>

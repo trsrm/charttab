@@ -2,7 +2,7 @@
   "name": "charttab",
   "version": "0.0.0",
   "dependencies": {
-    "angular-material": "1.1.7",
+    "angular-material": "1.1.9",
     "livereload": "2.3.0",
     "angular-chart.js": "1.1.1",
     "angular-moment": "1.2.0",

@@ -32,6 +32,11 @@ md-input-container .md-placeholder {
     top: -16px;
 }
 
+.hint {
+    font-size: 12px;
+    line-height: 20px;
+}
+
 /* BUTTONS */
 
 .md-button > md-icon {

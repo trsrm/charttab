@@ -1,4 +1,4 @@
-angular.module('charttab').controller('KeyResultFormCtrl', function(ui, krs, config) {
+angular.module('charttab').controller('KeyResultFormCtrl', function($scope, ui, krs, config, moment) {
     let vm = this;
 
     vm.isEdit = Boolean(vm.kr);
@@ -11,8 +11,21 @@ angular.module('charttab').controller('KeyResultFormCtrl', function(ui, krs, con
 
     vm.dateFormat = config.dateFormat;
 
+    vm.getDate = function(dateString) {
+        return moment(dateString, config.dateFormat).toDate();
+    };
+
+    $scope.$watch(() => vm.kr, function () {
+        if (vm.kr) {
+            vm.minDate = moment(vm.kr.start, config.dateFormat).toDate();
+        }
+    }, true);
+
     vm.submit = function() {
         let kr = angular.copy(vm.kr);
+        kr.start = moment(vm.kr.start).format(config.dateFormat);
+        kr.end = moment(vm.kr.end).format(config.dateFormat);
+
         if (vm.isEdit) {
             krs.update(kr.id, kr).then(ui.hideDialog);
         } else {

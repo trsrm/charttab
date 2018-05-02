@@ -10,7 +10,7 @@
     "test": "./node_modules/.bin/eslint app/"
   },
   "devDependencies": {
-    "eslint": "4.18.2",
+    "eslint": "4.19.1",
     "eslint-plugin-angular": "3.3.0",
     "grunt": "1.0.2",
     "grunt-chrome-manifest": "0.3.0",
@@ -24,7 +24,7 @@
     "grunt-contrib-htmlmin": "2.4.0",
     "grunt-contrib-imagemin": "2.0.1",
     "grunt-contrib-uglify-es": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
-    "grunt-contrib-watch": "1.0.0",
+    "grunt-contrib-watch": "1.0.1",
     "grunt-ng-annotate": "3.0.0",
     "grunt-svgmin": "5.0.0",
     "grunt-usemin": "3.1.1",

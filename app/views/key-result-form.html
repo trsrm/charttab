@@ -30,18 +30,19 @@
                     <md-input-container flex="50">
                         <label>Start Date</label>
                         <span class="md-placeholder">{{vm.dateFormat}}</span>
-                        <input type="text" autocomplete="off" maxlength="10" required
-                               ng-disabled="vm.isEdit"
-                               pattern="20\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])"
-                               ng-model="vm.kr.start">
+                        <md-datepicker ng-model="vm.kr.start"
+                            ng-disabled="vm.isEdit"
+                            ng-required="true"
+                            md-hide-icons="calendar"></md-datepicker>
                     </md-input-container>
                     <md-input-container flex="50">
                         <label>End Date</label>
                         <span class="md-placeholder">{{vm.dateFormat}}</span>
-                        <input type="text" autocomplete="off" maxlength="10" required
-                               ng-disabled="vm.isEdit"
-                               pattern="20\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])"
-                               ng-model="vm.kr.end">
+                        <md-datepicker ng-model="vm.kr.end"
+                            ng-disabled="vm.isEdit"
+                            ng-required="true"
+                            md-min-date="vm.minDate"
+                            md-hide-icons="calendar"></md-datepicker>
                     </md-input-container>
                 </div>
             </div>

@@ -115,6 +115,7 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
             for (let i = 0; i < kr.results.length; i++) {
                 if (kr.results[i].day === day) {
                     kr.results[i].value = value;
+                    kr.lastUpdated = moment().format(config.dateTimeFormat);
                     break;
                 }
             }

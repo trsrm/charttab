@@ -33,4 +33,18 @@ angular.module('charttab',
             .accentPalette('pink', {
                 'default': '300'
             });
+    })
+
+    .config(function ($mdDateLocaleProvider, config) {
+        $mdDateLocaleProvider.firstDayOfWeek = 1;
+
+        $mdDateLocaleProvider.parseDate = function (dateString) {
+            let m = moment(dateString, config.dateFormat);
+            return m.isValid() ? m.toDate() : new Date();
+        };
+
+        $mdDateLocaleProvider.formatDate = function (date) {
+            let m = moment(date);
+            return m.isValid() ? m.format(config.dateFormat) : '';
+        };
     });
