@@ -15,7 +15,7 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
         data.results = [];
 
         let start = moment(data.start, config.dateFormat).add(1, 'weeks').startOf('isoWeek');
-        let end = moment(data.end, config.dateFormat).add(1, 'day');
+        let end = moment(data.end, config.dateFormat).add(6, 'day');
         while (start.isBefore(end)) {
             data.results.push({
                 day: start.format(config.dateFormat),
