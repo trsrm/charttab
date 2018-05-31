@@ -124,6 +124,10 @@ angular.module('charttab').service('charts', function ($q, $window, moment, krs,
 
         // change the guide line color to indicate predicted progress:
         let predictedResult = chart.data[2][chart.data[2].length - 1];
+        if (!predictedResult) {
+            // at the end of a preriod the predicted result would be empty, so use the last value instead
+            predictedResult = chart.data[0][chart.data[0].length - 1];
+        }
         let progressColor = RED;
         if (predictedResult / kr.goal > 0.75) {
             progressColor = GREEN;
