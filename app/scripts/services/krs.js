@@ -12,17 +12,7 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
     krs.add = function (data) {
         let deferred = $q.defer();
 
-        data.results = [];
-
-        let start = moment(data.start, config.dateFormat).add(1, 'weeks').startOf('isoWeek');
-        let end = moment(data.end, config.dateFormat).add(6, 'day');
-        while (start.isBefore(end)) {
-            data.results.push({
-                day: start.format(config.dateFormat),
-                value: 0
-            });
-            start.add(1, 'weeks');
-        }
+        data.result = getResultsArray(data);
 
         let item = {};
         item[uid()] = data;
@@ -77,6 +67,20 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
             kr.title = data.title;
             kr.goal = data.goal;
             kr.units = data.units;
+
+            if (data.start !== kr.start || data.end !== kr.end) {
+                let oldResults = kr.results;
+                kr.start = data.start;
+                kr.end = data.end;
+                kr.results = getResultsArray(kr);
+                kr.results.forEach(res => {
+                    oldResults.forEach(oldRes => {
+                        if (res.day === oldRes.day) {
+                            res.value = oldRes.value;
+                        }
+                    })
+                });
+            }
 
             let item = {};
             item[id] = kr;
@@ -159,4 +163,22 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
 
         return deferred.promise;
     };
+
+    // --------------------------------------------------------------------------------------------
+
+    function getResultsArray(kr) {
+        let results = [];
+
+        let start = moment(kr.start, config.dateFormat).add(1, 'weeks').startOf('isoWeek');
+        let end = moment(kr.end, config.dateFormat).add(6, 'day');
+        while (start.isBefore(end)) {
+            results.push({
+                day: start.format(config.dateFormat),
+                value: 0
+            });
+            start.add(1, 'weeks');
+        }
+
+        return results;
+    }
 });

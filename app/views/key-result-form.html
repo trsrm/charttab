@@ -31,7 +31,6 @@
                         <label>Start Date</label>
                         <span class="md-placeholder">{{vm.dateFormat}}</span>
                         <md-datepicker ng-model="vm.kr.start"
-                            ng-disabled="vm.isEdit"
                             ng-required="true"
                             md-hide-icons="calendar"></md-datepicker>
                     </md-input-container>
@@ -39,7 +38,6 @@
                         <label>End Date</label>
                         <span class="md-placeholder">{{vm.dateFormat}}</span>
                         <md-datepicker ng-model="vm.kr.end"
-                            ng-disabled="vm.isEdit"
                             ng-required="true"
                             md-min-date="vm.minDate"
                             md-hide-icons="calendar"></md-datepicker>

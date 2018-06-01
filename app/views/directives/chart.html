@@ -2,7 +2,7 @@
     <md-card-content class="content">
         <div class="header">
             <div class="actions" layout="row" layout-align="center center">
-                <md-button ng-click="updateValue($event)">
+                <md-button ng-click="updateValue($event)" ng-disabled="isOutdated()">
                     Results
                     <md-tooltip md-direction="bottom" md-autohide="true" md-delay="800">
                         Update current results

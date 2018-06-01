@@ -53,6 +53,12 @@ angular.module('charttab').directive('chart', function () {
                 });
             };
 
+            $scope.isOutdated = function () {
+                let now = moment();
+                return moment($scope.data.end, config.dateFormat).isBefore(now)
+                       || moment($scope.data.start, config.dateFormat).isAfter(now);
+            };
+
         }
     };
 });
