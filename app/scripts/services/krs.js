@@ -12,7 +12,7 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
     krs.add = function (data) {
         let deferred = $q.defer();
 
-        data.result = getResultsArray(data);
+        data.results = getResultsArray(data);
 
         let item = {};
         item[uid()] = data;
@@ -29,6 +29,12 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
         let deferred = $q.defer();
 
         chrome.storage.sync.get(null, data => {
+            angular.forEach(data, kr => { // TODO: remove on next release
+                if (!kr.results) {
+                    kr.results = kr.result || getResultsArray(kr);
+                    delete kr.result;
+                }
+            });
             deferred.resolve(data);
         });
 
@@ -46,7 +52,10 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
             if (!results[id]) {
                 deferred.reject();
             }
-
+            if (!results[id].results) {
+                results[id].results = results[id].result || getResultsArray(results[id]); // TODO: remove on next release
+                delete results[id].result;
+            }
             deferred.resolve(results[id]);
         });
 
