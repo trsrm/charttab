@@ -19,7 +19,8 @@
     <!-- endbuild -->
 
 </head>
-<body ng-app="charttab" ng-controller="NewTabCtrl as vm" layout="column" ng-cloak>
+<body ng-app="charttab" ng-controller="NewTabCtrl as vm" layout="column" ng-cloak
+      md-theme="{{vm.isDarkMode ? 'darkMode' : ''}}">
 
 <md-toolbar>
     <div class="md-toolbar-tools">
@@ -43,6 +44,10 @@
         <md-button ng-click="vm.addBookmark($event)" ng-if="vm.page === vm.pages.bookmarks">
             <md-icon md-svg-src="images/add.svg"></md-icon>
             Add bookmark
+        </md-button>
+        <md-divider class="vertical-divider"></md-divider>
+        <md-button class="md-icon-button" ng-click="vm.changeConfig($event)">
+            <md-icon md-svg-src="images/settings.svg"></md-icon>
         </md-button>
     </div>
 </md-toolbar>
@@ -100,6 +105,7 @@
 <script src="scripts/config.js"></script>
 <script src="scripts/controllers/NewTabCtrl.js"></script>
 <script src="scripts/controllers/KeyResultFormCtrl.js"></script>
+<script src="scripts/controllers/ConfigFormCtrl.js"></script>
 <script src="scripts/controllers/BookmarkFormCtrl.js"></script>
 <script src="scripts/controllers/UpdateValueCtrl.js"></script>
 <script src="scripts/controllers/DeleteBookmarkCtrl.js"></script>
@@ -107,6 +113,7 @@
 <script src="scripts/directives/bookmark.js"></script>
 <script src="scripts/directives/chart.js"></script>
 <script src="scripts/services/krs.js"></script>
+<script src="scripts/services/ConfigService.js"></script>
 <script src="scripts/services/bookmarks.js"></script>
 <script src="scripts/services/charts.js"></script>
 <script src="scripts/services/ui.js"></script>

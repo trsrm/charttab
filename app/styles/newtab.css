@@ -62,4 +62,14 @@ md-input-container .md-placeholder {
     width: 260px;
 }
 
+.md-darkMode-theme {
+    -webkit-filter: grayscale(50%);
+    filter: grayscale(50%);
+}
 
+.vertical-divider {
+    border-top-width: 0;
+    border-right-width: 1px;
+    border-right-style: solid;
+    height: 70%;
+}

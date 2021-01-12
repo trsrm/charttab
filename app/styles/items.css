@@ -17,6 +17,10 @@
     padding-top: 16px;
 }
 
+.md-darkMode-theme .item-card .header {
+    border-bottom: 2px solid #202020;
+}
+
 .item-card .actions,
 .item-card .details {
     position: absolute;
