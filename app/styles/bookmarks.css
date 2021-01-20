@@ -8,6 +8,10 @@
     border: 1px solid #eaf1f5;
 }
 
+.item-card .md-darkMode-theme {
+    border: 1px solid #202020;
+}
+
 .item-card .favicon {
     position: relative;
     top: 2px;

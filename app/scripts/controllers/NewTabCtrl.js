@@ -1,4 +1,4 @@
-angular.module('charttab').controller('NewTabCtrl', function ($scope, ui, charts, bookmarks) {
+angular.module('charttab').controller('NewTabCtrl', function ($scope, ui, charts, bookmarks, config, ConfigService) {
     let vm = this;
 
     vm.pages = {
@@ -6,9 +6,6 @@ angular.module('charttab').controller('NewTabCtrl', function ($scope, ui, charts
         bookmarks: 2,
         apps: 3
     };
-
-    // set default page:
-    vm.page = vm.pages.charts;
 
     // listen to page change and mark it as not ready:
     $scope.$watch('page', function () {
@@ -18,6 +15,12 @@ angular.module('charttab').controller('NewTabCtrl', function ($scope, ui, charts
     vm.addKr = function (event) {
         ui.showDialog(event, '/views/key-result-form.html', {
             controller: 'KeyResultFormCtrl'
+        });
+    };
+
+    vm.changeConfig = function (event) {
+        ui.showDialog(event, '/views/config-form.html', {
+            controller: 'ConfigFormCtrl'
         });
     };
 
@@ -37,6 +40,7 @@ angular.module('charttab').controller('NewTabCtrl', function ($scope, ui, charts
     chrome.bookmarks.onMoved.addListener(loadBookmarks);
     chrome.bookmarks.onChildrenReordered.addListener(loadBookmarks);
 
+    getConfigs();
     loadCharts();
     loadBookmarks();
 
@@ -49,6 +53,17 @@ angular.module('charttab').controller('NewTabCtrl', function ($scope, ui, charts
             vm.chartHeight = charts.getBestHeight(chartsData.length);
             vm.chartFlex = charts.getBestFlex(chartsData.length);
             vm.ready = true;
+        });
+    }
+
+    function getConfigs() {
+        ConfigService.getConfig().then(data => {
+            config = Object.assign(config, data);
+            // set default page:
+            vm.page = vm.pages[config.defaultTab];
+
+            // set dark mode:
+            vm.isDarkMode = config.darkMode;
         });
     }
 

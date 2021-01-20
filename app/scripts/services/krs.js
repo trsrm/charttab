@@ -29,6 +29,7 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
         let deferred = $q.defer();
 
         chrome.storage.sync.get(null, data => {
+            delete data['chart-config']; // TODO: need to refactor
             angular.forEach(data, kr => { // TODO: remove on next release
                 if (!kr.results) {
                     kr.results = kr.result || getResultsArray(kr);

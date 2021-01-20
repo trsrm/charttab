@@ -33,6 +33,12 @@ angular.module('charttab',
             .accentPalette('pink', {
                 'default': '300'
             });
+        $mdThemingProvider.theme('darkMode')
+            .primaryPalette('grey', {
+                'default': '900'})
+            .accentPalette('grey', {
+                'default': '400'})
+            .dark();
     })
 
     .config(function ($mdDateLocaleProvider, config) {
