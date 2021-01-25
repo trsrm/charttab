@@ -1,5 +1,7 @@
-angular.module('charttab').controller('BookmarkFormCtrl', function (ui, bookmarks) {
-    let vm = this;
+angular.module('charttab').controller('BookmarkFormCtrl', function (
+    locals, ui, bookmarks
+) {
+    let vm = angular.extend(this, locals);
 
     vm.isEdit = Boolean(vm.bookmark);
 

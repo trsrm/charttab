@@ -9,7 +9,7 @@ angular.module('charttab').directive('chart', function () {
         controller: function ($scope, ui, moment, config) {
 
             let updateValueDialog = function (event, result, date) {
-                ui.showDialog(event, '/views/update-value.html', {
+                ui.showDialog(event, '/views/dialogs/update-value.html', {
                     controller: 'UpdateValueCtrl',
                     locals: {
                         chartData: $scope.data,
@@ -36,7 +36,7 @@ angular.module('charttab').directive('chart', function () {
             };
 
             $scope.edit = function (event) {
-                ui.showDialog(event, '/views/key-result-form.html', {
+                ui.showDialog(event, '/views/dialogs/key-result-form.html', {
                     controller: 'KeyResultFormCtrl',
                     locals: {
                         kr: angular.copy($scope.data)
@@ -45,7 +45,7 @@ angular.module('charttab').directive('chart', function () {
             };
 
             $scope.remove = function (event) {
-                ui.showDialog(event, '/views/delete-confirm.html', {
+                ui.showDialog(event, '/views/dialogs/delete-confirm.html', {
                     controller: 'DeleteKrCtrl',
                     locals: {
                         kr: $scope.data

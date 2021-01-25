@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_appName__",
-  "version": "0.5.3",
+  "version": "0.5.5",
   "default_locale": "en",
   "description": "__MSG_appDescription__",
   "icons": {
@@ -11,7 +11,6 @@
   },
   "author": "Taras Romaniv",
   "permissions": [
-    "management",
     "storage",
     "bookmarks",
     "downloads"
@@ -21,9 +20,5 @@
   },
   "homepage_url": "http://taras-romaniv.blogspot.com",
   "minimum_chrome_version": "40",
-  "options_ui": {
-    "page": "options.html",
-    "chrome_style": true
-  },
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

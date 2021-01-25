@@ -5,6 +5,24 @@ body {
     font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
+md-toolbar md-divider {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* TEXT */
+
+h3 {
+    font-weight: normal;
+    font-size: 18px;
+    margin: 0.6em 0 0.5em;
+}
+
+/* HELPERS */
+
+.padding-left {
+    padding-left: 15px;
+}
+
 /* PAGE DESCRIPTION */
 
 .page-description {
@@ -15,8 +33,7 @@ body {
     margin-top: -160px;
 }
 
-.page-description h1,
-.page-description h2 {
+.page-description h1, .page-description h2 {
     color: #9aa2a6;
 }
 
@@ -37,14 +54,22 @@ md-input-container .md-placeholder {
     line-height: 20px;
 }
 
+#file {
+    display: none;
+}
+
 /* BUTTONS */
 
-.md-button > md-icon {
+.md-button>md-icon {
     height: 24px;
     margin: -3px 4px 0 0;
 }
 
 /* DIALOGS */
+
+md-dialog {
+    transition: none !important;
+}
 
 .kr-form {
     width: 320px;
@@ -55,11 +80,15 @@ md-input-container .md-placeholder {
 }
 
 .update-value {
-    width: 300px;
+    width: 350px;
 }
 
 .delete-confirm {
-    width: 260px;
+    width: 280px;
+}
+
+.settings-form {
+    width: 350px;
 }
 
 .md-darkMode-theme {

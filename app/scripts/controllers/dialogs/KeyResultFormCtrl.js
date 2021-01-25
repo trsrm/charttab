@@ -1,5 +1,7 @@
-angular.module('charttab').controller('KeyResultFormCtrl', function($scope, ui, krs, config, moment) {
-    let vm = this;
+angular.module('charttab').controller('KeyResultFormCtrl', function (
+    locals, $scope, ui, krs, config, moment
+) {
+    let vm = angular.extend(this, locals);
 
     vm.isEdit = Boolean(vm.kr);
 
@@ -11,7 +13,7 @@ angular.module('charttab').controller('KeyResultFormCtrl', function($scope, ui, 
 
     vm.dateFormat = config.dateFormat;
 
-    vm.getDate = function(dateString) {
+    vm.getDate = function (dateString) {
         return moment(dateString, config.dateFormat).toDate();
     };
 
@@ -21,7 +23,7 @@ angular.module('charttab').controller('KeyResultFormCtrl', function($scope, ui, 
         }
     }, true);
 
-    vm.submit = function() {
+    vm.submit = function () {
         let kr = angular.copy(vm.kr);
         kr.start = moment(vm.kr.start).format(config.dateFormat);
         kr.end = moment(vm.kr.end).format(config.dateFormat);

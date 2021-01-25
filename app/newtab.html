@@ -46,7 +46,7 @@
             Add bookmark
         </md-button>
         <md-divider class="vertical-divider"></md-divider>
-        <md-button class="md-icon-button" aria-label="Open settings dialog" ng-click="vm.changeConfig($event)">
+        <md-button class="md-icon-button" aria-label="Open settings dialog" ng-click="vm.openSettings($event)">
             <md-icon md-svg-src="images/settings.svg"></md-icon>
         </md-button>
     </div>
@@ -104,20 +104,22 @@
 <script src="scripts/charttab.js"></script>
 <script src="scripts/config.js"></script>
 <script src="scripts/controllers/NewTabCtrl.js"></script>
-<script src="scripts/controllers/KeyResultFormCtrl.js"></script>
-<script src="scripts/controllers/ConfigFormCtrl.js"></script>
-<script src="scripts/controllers/BookmarkFormCtrl.js"></script>
-<script src="scripts/controllers/UpdateValueCtrl.js"></script>
-<script src="scripts/controllers/DeleteBookmarkCtrl.js"></script>
-<script src="scripts/controllers/DeleteKrCtrl.js"></script>
+<script src="scripts/controllers/dialogs/KeyResultFormCtrl.js"></script>
+<script src="scripts/controllers/dialogs/SettingsFormCtrl.js"></script>
+<script src="scripts/controllers/dialogs/BookmarkFormCtrl.js"></script>
+<script src="scripts/controllers/dialogs/UpdateValueCtrl.js"></script>
+<script src="scripts/controllers/dialogs/DeleteBookmarkCtrl.js"></script>
+<script src="scripts/controllers/dialogs/DeleteKrCtrl.js"></script>
 <script src="scripts/directives/bookmark.js"></script>
 <script src="scripts/directives/chart.js"></script>
+<script src="scripts/directives/file.js"></script>
 <script src="scripts/services/krs.js"></script>
-<script src="scripts/services/ConfigService.js"></script>
+<script src="scripts/services/settings.js"></script>
 <script src="scripts/services/bookmarks.js"></script>
 <script src="scripts/services/charts.js"></script>
 <script src="scripts/services/ui.js"></script>
 <script src="scripts/services/uid.js"></script>
+<script src="scripts/services/storage.js"></script>
 <!-- endbuild -->
 
 <!-- build:dev -->

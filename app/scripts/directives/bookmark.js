@@ -18,7 +18,7 @@ angular.module('charttab').directive('bookmark', function ($document) {
             $scope.host = tmp.hostname;
 
             $scope.edit = function (event) {
-                ui.showDialog(event, '/views/bookmark-form.html', {
+                ui.showDialog(event, '/views/dialogs/bookmark-form.html', {
                     controller: 'BookmarkFormCtrl',
                     locals: {
                         bookmark: angular.copy($scope.data)
@@ -27,7 +27,7 @@ angular.module('charttab').directive('bookmark', function ($document) {
             };
 
             $scope.remove = function (event) {
-                ui.showDialog(event, '/views/delete-confirm.html', {
+                ui.showDialog(event, '/views/dialogs/delete-confirm.html', {
                     controller: 'DeleteBookmarkCtrl',
                     locals: {
                         bookmark: $scope.data

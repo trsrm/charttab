@@ -7,9 +7,9 @@
             </div>
         </md-toolbar>
 
-        <md-dialog-content class="update-value" layout="row">
-            <div class="md-dialog-content">
-                <md-input-container flex="25">
+        <md-dialog-content class="update-value">
+            <div class="md-dialog-content" layout="row">
+                <md-input-container>
                     <label>Value</label>
                     <input type="number"
                         ng-model="vm.data.value"
@@ -20,8 +20,8 @@
                         title="Last updated: {{vm.chartData.lastUpdated}}"
                         required>
                 </md-input-container>
-                <span class="input-description" flex="35">{{vm.chartData.units}}</span>
-                <md-input-container flex="40">
+                <span class="input-description">{{vm.chartData.units}}</span>
+                <md-input-container>
                     <label>Date</label>
                     <span class="md-placeholder">{{vm.dateFormat}}</span>
                     <md-datepicker ng-model="vm.data.date"

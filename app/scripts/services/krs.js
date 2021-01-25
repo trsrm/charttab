@@ -30,10 +30,14 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
 
         chrome.storage.sync.get(null, data => {
             delete data['chart-config']; // TODO: need to refactor
-            angular.forEach(data, kr => { // TODO: remove on next release
-                if (!kr.results) {
-                    kr.results = kr.result || getResultsArray(kr);
-                    delete kr.result;
+            angular.forEach(data, kr => {
+                // TODO: remove on next release
+                let start = moment(kr.start, config.dateFormat).startOf('isoWeek').format(config.dateFormat);
+                if (kr.results[0].day !== start) {
+                    kr.results.unshift({
+                        day: start,
+                        value: 0
+                    })
                 }
             });
             deferred.resolve(data);
@@ -49,15 +53,20 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
     krs.getById = function (id) {
         let deferred = $q.defer();
 
-        chrome.storage.sync.get(id, results => {
-            if (!results[id]) {
+        chrome.storage.sync.get(id, krs => {
+            if (!krs[id]) {
                 deferred.reject();
             }
-            if (!results[id].results) {
-                results[id].results = results[id].result || getResultsArray(results[id]); // TODO: remove on next release
-                delete results[id].result;
+            let kr = krs[id];
+            // TODO: remove on next release
+            let start = moment(kr.start, config.dateFormat).startOf('isoWeek').format(config.dateFormat);
+            if (kr.results[0].day !== start) {
+                kr.results.unshift({
+                    day: start,
+                    value: 0
+                })
             }
-            deferred.resolve(results[id]);
+            deferred.resolve(krs[id]);
         });
 
         return deferred.promise;
@@ -166,7 +175,7 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
         krs.getAll().then(krs => {
             for (let key in krs) {
                 if (krs.hasOwnProperty(key)) {
-                    deferred.resolve({start: krs[key].start, end: krs[key].end});
+                    deferred.resolve({ start: krs[key].start, end: krs[key].end });
                 }
             }
         });
@@ -179,7 +188,7 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
     function getResultsArray(kr) {
         let results = [];
 
-        let start = moment(kr.start, config.dateFormat).add(1, 'weeks').startOf('isoWeek');
+        let start = moment(kr.start, config.dateFormat).startOf('isoWeek');
         let end = moment(kr.end, config.dateFormat).add(6, 'day');
         while (start.isBefore(end)) {
             results.push({

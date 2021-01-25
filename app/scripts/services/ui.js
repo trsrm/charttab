@@ -16,7 +16,7 @@ angular.module('charttab').service('ui', function ($mdDialog) {
             controllerAs: 'vm',
             targetEvent: event,
             focusOnOpen: false,
-            bindToController: true
+            locals: {}            
         }, options);
         $mdDialog.show(options);
     };

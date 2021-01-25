@@ -1,5 +1,7 @@
-angular.module('charttab').controller('UpdateValueCtrl', function(ui, moment, config, krs) {
-    let vm = this;
+angular.module('charttab').controller('UpdateValueCtrl', function (
+    locals, ui, moment, config, krs
+) {
+    let vm = angular.extend(this, locals);
 
     // pre-fill previous value for a new week:
     let nextMonday = moment().endOf('isoWeek');
@@ -14,11 +16,11 @@ angular.module('charttab').controller('UpdateValueCtrl', function(ui, moment, co
 
     vm.dateFormat = config.dateFormat;
 
-    vm.minDate = moment(vm.chartData.start, config.dateFormat).toDate();
+    vm.minDate = moment(vm.chartData.start, config.dateFormat).startOf('isoWeek').subtract(1, 'days').toDate();
 
-    vm.maxDate = moment(vm.chartData.end, config.dateFormat).toDate();
+    vm.maxDate = moment(vm.chartData.end, config.dateFormat).endOf('isonWeek').toDate();
 
-    vm.update = function() {
+    vm.update = function () {
         krs.updateValue(vm.chartData.id, vm.data.date, vm.data.value).then(ui.hideDialog);
     };
 

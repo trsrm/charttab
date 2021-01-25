@@ -1,4 +1,6 @@
-angular.module('charttab').controller('NewTabCtrl', function ($scope, ui, charts, bookmarks, config, ConfigService) {
+angular.module('charttab').controller('NewTabCtrl', function (
+    $scope, ui, charts, bookmarks, config, SettingsService
+) {
     let vm = this;
 
     vm.pages = {
@@ -13,19 +15,19 @@ angular.module('charttab').controller('NewTabCtrl', function ($scope, ui, charts
     });
 
     vm.addKr = function (event) {
-        ui.showDialog(event, '/views/key-result-form.html', {
+        ui.showDialog(event, '/views/dialogs/key-result-form.html', {
             controller: 'KeyResultFormCtrl'
         });
     };
 
-    vm.changeConfig = function (event) {
-        ui.showDialog(event, '/views/config-form.html', {
-            controller: 'ConfigFormCtrl'
+    vm.openSettings = function (event) {
+        ui.showDialog(event, '/views/dialogs/settings-form.html', {
+            controller: 'SettingsFormCtrl'
         });
     };
 
     vm.addBookmark = function (event) {
-        ui.showDialog(event, '/views/bookmark-form.html', {
+        ui.showDialog(event, '/views/dialogs/bookmark-form.html', {
             controller: 'BookmarkFormCtrl'
         });
     };
@@ -57,7 +59,7 @@ angular.module('charttab').controller('NewTabCtrl', function ($scope, ui, charts
     }
 
     function getConfigs() {
-        ConfigService.getConfig().then(data => {
+        SettingsService.getConfig().then(data => {
             config = Object.assign(config, data);
             // set default page:
             vm.page = vm.pages[config.defaultTab];

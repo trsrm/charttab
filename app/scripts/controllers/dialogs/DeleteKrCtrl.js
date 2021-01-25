@@ -1,5 +1,7 @@
-angular.module('charttab').controller('DeleteKrCtrl', function (ui, krs) {
-    let vm = this;
+angular.module('charttab').controller('DeleteKrCtrl', function (
+    locals, ui, krs
+) {
+    let vm = angular.extend(this, locals);
 
     vm.title = vm.kr.title;
 
