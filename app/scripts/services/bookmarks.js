@@ -94,8 +94,8 @@ angular.module('charttab').service('bookmarks', function ($q, $window) {
     bookmarks.getBestHeight = function (bookmarksNumber) {
         let window = $window.innerHeight;
         let navbar = 64;
-        let heading = 48;
-        let spacings = 28;
+        let cardHeading = 44;
+        let cardSpacings = 42;
         let rowsNumber;
         if (bookmarksNumber < 7) {
             rowsNumber = 2;
@@ -104,7 +104,7 @@ angular.module('charttab').service('bookmarks', function ($q, $window) {
         } else {
             rowsNumber = 4;
         }
-        return Math.floor((window - navbar) / rowsNumber) - heading - spacings;
+        return Math.floor((window - navbar) / rowsNumber) - cardHeading - cardSpacings;
     };
 
     /**
