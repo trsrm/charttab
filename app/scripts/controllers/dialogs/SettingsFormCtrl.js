@@ -29,7 +29,7 @@ angular.module('charttab').controller('SettingsFormCtrl', function (
         let config = angular.copy(vm.config);
         SettingsService.updateConfig(config).then(() => {
             chrome.tabs.reload();
-            ui.hideDialog;
+            ui.hideDialog();
         });
     };
 
