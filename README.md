@@ -15,6 +15,10 @@ bower install
 
 Run `grunt` for building and `grunt debug` for preview.
 
+## Unit tests
+
+Run `npm install` and then `npm run unit` to execute the test suite. Use `npm test` to run ESLint.
+
 ## Testing
 
 Run `npm test` to run linting.

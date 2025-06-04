@@ -9,8 +9,7 @@
     "moment": false
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:angular/johnpapa"
+    "eslint:recommended"
   ],
   "rules": {
     "indent": [
@@ -28,8 +27,7 @@
     "semi": [
       "error",
       "always"
-    ],
-    "angular/no-service-method": false,
-    "angular/controller-name": false
+    ]
+    
   }
 }
