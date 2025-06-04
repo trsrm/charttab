@@ -1,3 +1,7 @@
+/**
+ * Service that returns a function generating a pseudo-random string
+ * identifier.
+ */
 angular.module('charttab').factory('uid', function () {
 
     function uid() {
