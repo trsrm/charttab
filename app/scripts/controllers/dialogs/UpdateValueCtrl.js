@@ -18,7 +18,7 @@ angular.module('charttab').controller('UpdateValueCtrl', function (
 
     vm.minDate = moment(vm.chartData.start, config.dateFormat).startOf('isoWeek').subtract(1, 'days').toDate();
 
-    vm.maxDate = moment(vm.chartData.end, config.dateFormat).endOf('isonWeek').toDate();
+    vm.maxDate = moment(vm.chartData.end, config.dateFormat).endOf('isoWeek').toDate();
 
     vm.update = function () {
         krs.updateValue(vm.chartData.id, vm.data.date, vm.data.value).then(ui.hideDialog);
