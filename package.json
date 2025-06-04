@@ -7,11 +7,11 @@
   "scripts": {
     "debug": "grunt debug",
     "build": "grunt build",
-    "test": "./node_modules/.bin/eslint app/"
+    "test": "npx -y eslint@7 -c .eslintrc.json app/",
+    "unit": "node test/run.js"
   },
   "devDependencies": {
-    "eslint": "4.19.1",
-    "eslint-plugin-angular": "3.3.0",
+    "eslint": "^7.32.0",
     "grunt": "1.0.2",
     "grunt-chrome-manifest": "0.3.0",
     "grunt-concurrent": "2.3.1",
@@ -30,7 +30,8 @@
     "grunt-usemin": "3.1.1",
     "grunt-wiredep": "3.0.1",
     "load-grunt-tasks": "3.5.2",
-    "time-grunt": "1.4.0"
+    "time-grunt": "1.4.0",
+    "moment": "2.30.1"
   },
   "engines": {
     "node": ">=8.9.0"
