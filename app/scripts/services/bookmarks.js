@@ -9,7 +9,7 @@ angular.module('charttab').service('bookmarks', function ($q, $window) {
      * @return {PromiseLike<any>}
      */
     bookmarks.getFolder = function () {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         chrome.bookmarks.search({title: 'ChartTab'}, results => {
             if (results && results[0] && results[0].parentId === '2') {
@@ -30,7 +30,7 @@ angular.module('charttab').service('bookmarks', function ($q, $window) {
      * @return {PromiseLike<any>}
      */
     bookmarks.add = function (data) {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         bookmarks.getFolder().then(folder => {
             data.parentId = folder.id;
@@ -45,7 +45,7 @@ angular.module('charttab').service('bookmarks', function ($q, $window) {
      * @return {PromiseLike<any>}
      */
     bookmarks.getAll = function () {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         bookmarks.getFolder().then(folder => {
             chrome.bookmarks.getSubTree(folder.id, subTree => {
@@ -63,11 +63,11 @@ angular.module('charttab').service('bookmarks', function ($q, $window) {
      * @return {PromiseLike<any>}
      */
     bookmarks.update = function (id, data) {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         chrome.bookmarks.update(id, {
             title: data.title,
-            url: data.url
+            url: data.url,
         }, deferred.resolve);
 
         return deferred.promise;
@@ -79,7 +79,7 @@ angular.module('charttab').service('bookmarks', function ($q, $window) {
      * @return {PromiseLike<any>}
      */
     bookmarks.remove = function (id) {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         chrome.bookmarks.remove(id, deferred.resolve);
 
@@ -92,10 +92,10 @@ angular.module('charttab').service('bookmarks', function ($q, $window) {
      * @return {number}
      */
     bookmarks.getBestHeight = function (bookmarksNumber) {
-        let window = $window.innerHeight;
-        let navbar = 64;
-        let cardHeading = 44;
-        let cardSpacings = 42;
+        const window = $window.innerHeight;
+        const navbar = 64;
+        const cardHeading = 44;
+        const cardSpacings = 42;
         let rowsNumber;
         if (bookmarksNumber < 7) {
             rowsNumber = 2;

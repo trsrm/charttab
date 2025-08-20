@@ -9,7 +9,7 @@ angular.module('charttab').service('SettingsService', function ($q) {
      * @return {PromiseLike<any>}
      */
     SettingsService.getConfig = function () {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         chrome.storage.sync.get('chart-config', data => {
             deferred.resolve(data['chart-config']);
@@ -24,8 +24,8 @@ angular.module('charttab').service('SettingsService', function ($q) {
      * @return {PromiseLike<any>}
      */
     SettingsService.updateConfig = function (data) {
-        let deferred = $q.defer();
-        let item = {};
+        const deferred = $q.defer();
+        const item = {};
         item['chart-config'] = data;
         chrome.storage.sync.set(item, deferred.resolve);
 

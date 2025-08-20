@@ -1,7 +1,7 @@
 angular.module('charttab').controller('SettingsFormCtrl', function (
-    locals, ui, SettingsService, storage, $timeout, $document
+    locals, ui, SettingsService, storage, $timeout, $document,
 ) {
-    let vm = angular.extend(this, locals);
+    const vm = angular.extend(this, locals);
 
     // TODO: need to move in the separate file
     vm.pages = [
@@ -26,7 +26,7 @@ angular.module('charttab').controller('SettingsFormCtrl', function (
     }
 
     vm.submit = function () {
-        let config = angular.copy(vm.config);
+        const config = angular.copy(vm.config);
         SettingsService.updateConfig(config).then(() => {
             chrome.tabs.reload();
             ui.hideDialog();

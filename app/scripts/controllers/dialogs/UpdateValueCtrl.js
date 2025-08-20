@@ -1,17 +1,17 @@
 angular.module('charttab').controller('UpdateValueCtrl', function (
-    locals, ui, moment, config, krs
+    locals, ui, moment, config, krs,
 ) {
-    let vm = angular.extend(this, locals);
+    const vm = angular.extend(this, locals);
 
     // pre-fill previous value for a new week:
-    let nextMonday = moment().endOf('isoWeek');
+    const nextMonday = moment().endOf('isoWeek');
     if (moment(vm.date, config.dateFormat).endOf('isoWeek').isSame(nextMonday) && vm.result === 0) {
         vm.result = krs.getLastValue(vm.chartData.results);
     }
 
     vm.data = {
         date: vm.date,
-        value: vm.result
+        value: vm.result,
     };
 
     vm.dateFormat = config.dateFormat;

@@ -2,7 +2,7 @@ angular.module('charttab',
     [
         'ngMaterial',
         'chart.js',
-        'angularMoment'
+        'angularMoment',
     ])
 
     .config(function ($compileProvider) {
@@ -26,12 +26,12 @@ angular.module('charttab',
             'A400': '005C89',
             'A700': '00476A',
             'contrastDefaultColor': 'light',
-            'contrastDarkColors': ['50', '100', '200', '300', '400']
+            'contrastDarkColors': ['50', '100', '200', '300', '400'],
         });
         $mdThemingProvider.theme('default')
             .primaryPalette('primary')
             .accentPalette('pink', {
-                'default': '300'
+                'default': '300',
             });
         $mdThemingProvider.theme('darkMode')
             .primaryPalette('grey', {
@@ -45,12 +45,12 @@ angular.module('charttab',
         $mdDateLocaleProvider.firstDayOfWeek = 1;
 
         $mdDateLocaleProvider.parseDate = function (dateString) {
-            let m = moment(dateString, config.dateFormat);
+            const m = moment(dateString, config.dateFormat);
             return m.isValid() ? m.toDate() : new Date();
         };
 
         $mdDateLocaleProvider.formatDate = function (date) {
-            let m = moment(date);
+            const m = moment(date);
             return m.isValid() ? m.format(config.dateFormat) : '';
         };
     });

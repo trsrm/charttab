@@ -8,6 +8,6 @@ angular.module('charttab').constant('config', {
 
     defaultTab: 'charts',
 
-    darkMode: false
+    darkMode: false,
 
 });

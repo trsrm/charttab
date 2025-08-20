@@ -1,7 +1,7 @@
 angular.module('charttab').controller('DeleteBookmarkCtrl', function (
-    locals, ui, bookmarks
+    locals, ui, bookmarks,
 ) {
-    let vm = angular.extend(this, locals);
+    const vm = angular.extend(this, locals);
 
     vm.title = vm.bookmark.title;
 
