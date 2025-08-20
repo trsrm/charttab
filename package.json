@@ -8,7 +8,8 @@
     "debug": "grunt debug",
     "build": "grunt build",
     "test": "npx -y eslint@7 -c .eslintrc.json app/",
-    "unit": "node test/run.js"
+    "unit": "node test/run.js",
+    "format": "prettier --write \"app/**/*.js\""
   },
   "devDependencies": {
     "eslint": "^7.32.0",
