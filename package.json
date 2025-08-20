@@ -7,7 +7,7 @@
   "scripts": {
     "debug": "grunt debug",
     "build": "grunt build",
-    "test": "npx -y eslint@7 -c .eslintrc.json app/",
+    "test": "npx -y eslint@7 app/",
     "unit": "node test/run.js",
     "format": "prettier --write \"app/**/*.js\""
   },
