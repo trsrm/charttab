@@ -14,12 +14,12 @@ angular.module('charttab').service('storage', function ($q, $window, moment, con
      * @return {PromiseLike<any>}
      */
     storage.exportData = function () {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         chrome.storage.sync.get(null, data => {
-            let string = JSON.stringify(data);
-            let blob = new Blob([string], {type: 'application/json'});
-            let today = moment().format(config.dateFormat);
+            const string = JSON.stringify(data);
+            const blob = new Blob([string], {type: 'application/json'});
+            const today = moment().format(config.dateFormat);
 
             if (dataFile !== null) {
                 $window.URL.revokeObjectURL(dataFile);
@@ -29,7 +29,7 @@ angular.module('charttab').service('storage', function ($q, $window, moment, con
 
             chrome.downloads.download({
                 url: dataFile,
-                filename: `charttab-backup_${today}.json`
+                filename: `charttab-backup_${today}.json`,
             });
 
             deferred.resolve(dataFile);
@@ -44,16 +44,16 @@ angular.module('charttab').service('storage', function ($q, $window, moment, con
      * @return {PromiseLike<any>}
      */
     storage.importData = function (file) {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         if (file.type !== 'application/json') {
             deferred.reject();
         }
 
-        let fileReader = new FileReader();
+        const fileReader = new FileReader();
         fileReader.addEventListener('load', event => {
             try {
-                let data = JSON.parse(event.target.result);
+                const data = JSON.parse(event.target.result);
 
                 chrome.storage.sync.clear(() => {
                     chrome.storage.sync.set(data, deferred.resolve);

@@ -4,16 +4,16 @@ angular.module('charttab').directive('bookmark', function ($document) {
         restrict: 'E',
         scope: {
             data: '=',
-            height: '='
+            height: '=',
         },
         controller: function ($scope, config, ui) {
 
             $scope.thumbnailStyle = {
                 'background-image': 'url(' + config.thumbnailsURL.replace('{{url}}', $scope.data.url) + ')',
-                'height': $scope.height + 'px'
+                'height': $scope.height + 'px',
             };
 
-            let tmp = $document[0].createElement('a');
+            const tmp = $document[0].createElement('a');
             tmp.href = $scope.data.url;
             $scope.host = tmp.hostname;
 
@@ -21,8 +21,8 @@ angular.module('charttab').directive('bookmark', function ($document) {
                 ui.showDialog(event, '/views/dialogs/bookmark-form.html', {
                     controller: 'BookmarkFormCtrl',
                     locals: {
-                        bookmark: angular.copy($scope.data)
-                    }
+                        bookmark: angular.copy($scope.data),
+                    },
                 });
             };
 
@@ -30,10 +30,10 @@ angular.module('charttab').directive('bookmark', function ($document) {
                 ui.showDialog(event, '/views/dialogs/delete-confirm.html', {
                     controller: 'DeleteBookmarkCtrl',
                     locals: {
-                        bookmark: $scope.data
-                    }
+                        bookmark: $scope.data,
+                    },
                 });
             };
-        }
+        },
     };
 });

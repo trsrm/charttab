@@ -1,7 +1,7 @@
 angular.module('charttab').controller('KeyResultFormCtrl', function (
-    locals, $scope, ui, krs, config, moment
+    locals, $scope, ui, krs, config, moment,
 ) {
-    let vm = angular.extend(this, locals);
+    const vm = angular.extend(this, locals);
 
     vm.isEdit = Boolean(vm.kr);
 
@@ -24,7 +24,7 @@ angular.module('charttab').controller('KeyResultFormCtrl', function (
     }, true);
 
     vm.submit = function () {
-        let kr = angular.copy(vm.kr);
+        const kr = angular.copy(vm.kr);
         kr.start = moment(vm.kr.start).format(config.dateFormat);
         kr.end = moment(vm.kr.end).format(config.dateFormat);
 

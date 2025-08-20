@@ -4,18 +4,18 @@ angular.module('charttab').directive('chart', function () {
         restrict: 'E',
         scope: {
             data: '=',
-            height: '='
+            height: '=',
         },
         controller: function ($scope, ui, moment, config) {
 
-            let updateValueDialog = function (event, result, date) {
+            const updateValueDialog = function (event, result, date) {
                 ui.showDialog(event, '/views/dialogs/update-value.html', {
                     controller: 'UpdateValueCtrl',
                     locals: {
                         chartData: $scope.data,
                         date: date,
-                        result: result
-                    }
+                        result: result,
+                    },
                 });
             };
 
@@ -23,15 +23,15 @@ angular.module('charttab').directive('chart', function () {
                 if (!elements.length) {
                     return;
                 }
-                let pointIndex = elements[0]._index;
-                let labels = $scope.data.labels;
-                let data = $scope.data.data[0];
-                let date = moment(labels[pointIndex], config.dateFormat).subtract(1, 'days').format(config.dateFormat);
+                const pointIndex = elements[0]._index;
+                const labels = $scope.data.labels;
+                const data = $scope.data.data[0];
+                const date = moment(labels[pointIndex], config.dateFormat).subtract(1, 'days').format(config.dateFormat);
                 updateValueDialog(event, data[pointIndex], date);
             };
 
             $scope.updateValue = function (event) {
-                let today = moment().format(config.dateFormat);
+                const today = moment().format(config.dateFormat);
                 updateValueDialog(event, $scope.data.result, today);
             };
 
@@ -39,8 +39,8 @@ angular.module('charttab').directive('chart', function () {
                 ui.showDialog(event, '/views/dialogs/key-result-form.html', {
                     controller: 'KeyResultFormCtrl',
                     locals: {
-                        kr: angular.copy($scope.data)
-                    }
+                        kr: angular.copy($scope.data),
+                    },
                 });
             };
 
@@ -48,17 +48,17 @@ angular.module('charttab').directive('chart', function () {
                 ui.showDialog(event, '/views/dialogs/delete-confirm.html', {
                     controller: 'DeleteKrCtrl',
                     locals: {
-                        kr: $scope.data
-                    }
+                        kr: $scope.data,
+                    },
                 });
             };
 
             $scope.isOutdated = function () {
-                let now = moment();
+                const now = moment();
                 return moment($scope.data.end, config.dateFormat).isBefore(now)
                        || moment($scope.data.start, config.dateFormat).isAfter(now);
             };
 
-        }
+        },
     };
 });

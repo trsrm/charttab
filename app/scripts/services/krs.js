@@ -10,11 +10,11 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
      * @return {PromiseLike<any>}
      */
     krs.add = function (data) {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         data.results = getResultsArray(data);
 
-        let item = {};
+        const item = {};
         item[uid()] = data;
         chrome.storage.sync.set(item, deferred.resolve);
 
@@ -26,18 +26,18 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
      * @return {PromiseLike<any>}
      */
     krs.getAll = function () {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         chrome.storage.sync.get(null, data => {
             delete data['chart-config']; // TODO: need to refactor
             angular.forEach(data, kr => {
                 // TODO: remove on next release
-                let start = moment(kr.start, config.dateFormat).startOf('isoWeek').format(config.dateFormat);
+                const start = moment(kr.start, config.dateFormat).startOf('isoWeek').format(config.dateFormat);
                 if (kr.results[0].day !== start) {
                     kr.results.unshift({
                         day: start,
-                        value: 0
-                    })
+                        value: 0,
+                    });
                 }
             });
             deferred.resolve(data);
@@ -51,20 +51,20 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
      * @return {PromiseLike<any>}
      */
     krs.getById = function (id) {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         chrome.storage.sync.get(id, krs => {
             if (!krs[id]) {
                 deferred.reject();
             }
-            let kr = krs[id];
+            const kr = krs[id];
             // TODO: remove on next release
-            let start = moment(kr.start, config.dateFormat).startOf('isoWeek').format(config.dateFormat);
+            const start = moment(kr.start, config.dateFormat).startOf('isoWeek').format(config.dateFormat);
             if (kr.results[0].day !== start) {
                 kr.results.unshift({
                     day: start,
-                    value: 0
-                })
+                    value: 0,
+                });
             }
             deferred.resolve(krs[id]);
         });
@@ -79,7 +79,7 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
      * @return {PromiseLike<any>}
      */
     krs.update = function (id, data) {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         krs.getById(id).then(kr => {
 
@@ -88,7 +88,7 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
             kr.units = data.units;
 
             if (data.start !== kr.start || data.end !== kr.end) {
-                let oldResults = kr.results;
+                const oldResults = kr.results;
                 kr.start = data.start;
                 kr.end = data.end;
                 kr.results = getResultsArray(kr);
@@ -97,11 +97,11 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
                         if (res.day === oldRes.day) {
                             res.value = oldRes.value;
                         }
-                    })
+                    });
                 });
             }
 
-            let item = {};
+            const item = {};
             item[id] = kr;
             chrome.storage.sync.set(item, deferred.resolve);
         });
@@ -115,7 +115,7 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
      * @return {PromiseLike<any>}
      */
     krs.remove = function (id) {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         chrome.storage.sync.remove(id, deferred.resolve);
 
@@ -130,10 +130,10 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
      * @return {PromiseLike<any>}
      */
     krs.updateValue = function (id, date, value) {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         krs.getById(id).then(kr => {
-            let day = moment(date, config.dateFormat).add(1, 'weeks').startOf('isoWeek').format(config.dateFormat);
+            const day = moment(date, config.dateFormat).add(1, 'weeks').startOf('isoWeek').format(config.dateFormat);
 
             for (let i = 0; i < kr.results.length; i++) {
                 if (kr.results[i].day === day) {
@@ -143,7 +143,7 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
                 }
             }
 
-            let item = {};
+            const item = {};
             item[id] = kr;
             chrome.storage.sync.set(item, deferred.resolve);
         });
@@ -170,10 +170,10 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
      * @return {PromiseLike<any>}
      */
     krs.getDates = function () {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         krs.getAll().then(krs => {
-            for (let key in krs) {
+            for (const key in krs) {
                 if (krs.hasOwnProperty(key)) {
                     deferred.resolve({ start: krs[key].start, end: krs[key].end });
                 }
@@ -186,14 +186,14 @@ angular.module('charttab').service('krs', function ($q, moment, config, uid) {
     // --------------------------------------------------------------------------------------------
 
     function getResultsArray(kr) {
-        let results = [];
+        const results = [];
 
-        let start = moment(kr.start, config.dateFormat).startOf('isoWeek');
-        let end = moment(kr.end, config.dateFormat).add(6, 'day');
+        const start = moment(kr.start, config.dateFormat).startOf('isoWeek');
+        const end = moment(kr.end, config.dateFormat).add(6, 'day');
         while (start.isBefore(end)) {
             results.push({
                 day: start.format(config.dateFormat),
-                value: 0
+                value: 0,
             });
             start.add(1, 'weeks');
         }

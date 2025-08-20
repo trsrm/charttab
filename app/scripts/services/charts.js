@@ -9,13 +9,13 @@ angular.module('charttab').service('charts', function ($q, $window, moment, krs,
      * @return {PromiseLike<any>}
      */
     charts.getAll = function () {
-        let deferred = $q.defer();
+        const deferred = $q.defer();
 
         krs.getAll().then(krsData => {
             let charts = [];
 
             angular.forEach(krsData, (kr, id) => {
-                let chart = makeChart(kr, id);
+                const chart = makeChart(kr, id);
                 charts.push(chart);
             });
 
@@ -41,10 +41,10 @@ angular.module('charttab').service('charts', function ($q, $window, moment, krs,
      * @return {number}
      */
     charts.getBestHeight = function (chartsNumber) {
-        let window = $window.innerHeight;
-        let navbar = 64;
-        let heading = 48;
-        let spacings = 33;
+        const window = $window.innerHeight;
+        const navbar = 64;
+        const heading = 48;
+        const spacings = 33;
         let rowsNumber;
         if (chartsNumber < 7) {
             rowsNumber = 2;
@@ -82,22 +82,22 @@ angular.module('charttab').service('charts', function ($q, $window, moment, krs,
      * @return {object}
      */
     function makeChart(kr, id) {
-        let chart = angular.extend({
+        const chart = angular.extend({
             id: id,
             labels: [],
             data: [[], [], []],
             override: angular.copy(overrideOptions),
-            options: angular.copy(defaultOptions)
+            options: angular.copy(defaultOptions),
         }, kr);
         chart.options.scales.yAxes[0].ticks = {max: kr.goal};
 
-        let guideStep = kr.goal / (kr.results.length - 1);
+        const guideStep = kr.goal / (kr.results.length - 1);
         let predictionStep;
         kr.results.forEach((result, index) => {
             chart.labels.push(result.day);
 
-            let resultDay = moment(result.day, config.dateFormat);
-            let nextTuesday = moment().add(1, 'weeks').startOf('isoWeek').add(1, 'days');
+            const resultDay = moment(result.day, config.dateFormat);
+            const nextTuesday = moment().add(1, 'weeks').startOf('isoWeek').add(1, 'days');
             if (resultDay.isBefore(nextTuesday)) {
                 // draw the results line:
                 chart.data[0].push(result.value);
@@ -107,14 +107,14 @@ angular.module('charttab').service('charts', function ($q, $window, moment, krs,
             } else {
                 if (typeof predictionStep === 'undefined') {
                     // initialize the prediction line:
-                    let lastValue = kr.results[index - 1].value;
+                    const lastValue = kr.results[index - 1].value;
                     chart.data[2][index - 1] = lastValue;
                     predictionStep = (lastValue - kr.results[0].value) / (index - 1);
                     predictionStep = Math.max(predictionStep, 0);
                 }
 
                 // draw the prediction line:
-                let predictedValue = chart.data[2][index - 1] + predictionStep;
+                const predictedValue = chart.data[2][index - 1] + predictionStep;
                 chart.data[2].push(predictedValue);
             }
 
@@ -155,37 +155,37 @@ angular.module('charttab').service('charts', function ($q, $window, moment, krs,
         layout: {
             padding: {
                 left: 5,
-                bottom: 12
-            }
+                bottom: 12,
+            },
         },
         elements: {
             point: {
                 radius: 4,
-                hitRadius: 4
+                hitRadius: 4,
             },
             line: {
-                tension: 0
-            }
+                tension: 0,
+            },
         },
         scales: {
             yAxes: [{
                 display: false,
                 gridLines: {
-                    display: false
-                }
+                    display: false,
+                },
             }],
             xAxes: [{
                 display: false,
                 gridLines: {
-                    display: false
-                }
-            }]
-        }
+                    display: false,
+                },
+            }],
+        },
     };
 
     // default lines styles:
     const overrideOptions = [{
-        label: 'Progress'
+        label: 'Progress',
     }, {
         label: 'Guide',
         borderWidth: 1,
@@ -195,7 +195,7 @@ angular.module('charttab').service('charts', function ($q, $window, moment, krs,
         borderDash: [1, 2],
         borderCapStyle: 'round',
         cubicInterpolationMode: 'monotone',
-        fill: false
+        fill: false,
     }, {
         label: 'Prediction',
         borderColor: '#DCDCDC',
@@ -203,7 +203,7 @@ angular.module('charttab').service('charts', function ($q, $window, moment, krs,
         pointRadius: 0,
         pointHitRadius: 0,
         pointHoverRadius: 0,
-        fill: false
+        fill: false,
     }];
 
 });

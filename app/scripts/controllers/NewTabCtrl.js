@@ -1,12 +1,12 @@
 angular.module('charttab').controller('NewTabCtrl', function (
-    $scope, ui, charts, bookmarks, config, SettingsService
+    $scope, ui, charts, bookmarks, config, SettingsService,
 ) {
-    let vm = this;
+    const vm = this;
 
     vm.pages = {
         charts: 1,
         bookmarks: 2,
-        apps: 3
+        apps: 3,
     };
 
     // listen to page change and mark it as not ready:
@@ -16,19 +16,19 @@ angular.module('charttab').controller('NewTabCtrl', function (
 
     vm.addKr = function (event) {
         ui.showDialog(event, '/views/dialogs/key-result-form.html', {
-            controller: 'KeyResultFormCtrl'
+            controller: 'KeyResultFormCtrl',
         });
     };
 
     vm.openSettings = function (event) {
         ui.showDialog(event, '/views/dialogs/settings-form.html', {
-            controller: 'SettingsFormCtrl'
+            controller: 'SettingsFormCtrl',
         });
     };
 
     vm.addBookmark = function (event) {
         ui.showDialog(event, '/views/dialogs/bookmark-form.html', {
-            controller: 'BookmarkFormCtrl'
+            controller: 'BookmarkFormCtrl',
         });
     };
 
