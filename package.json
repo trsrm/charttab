@@ -2,6 +2,7 @@
   "name": "charttab",
   "version": "0.0.0",
   "description": "Motivational charts on the Chrome's new tab page.",
+  "author": "Taras Romaniv",
   "license": "MIT",
   "dependencies": {},
   "scripts": {

@@ -1,5 +1,8 @@
 # Repository Guidelines
 
+> Archived project (see README). These guidelines are kept for reference,
+> not because active development is expected.
+
 ## Project Structure & Module Organization
 - `app/`: Source for the Chrome extension.
   - `scripts/`: AngularJS 1.x app code
